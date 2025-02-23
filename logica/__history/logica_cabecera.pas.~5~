@@ -1,0 +1,20 @@
+unit logica_cabecera;
+
+
+interface
+ uses classes, sysutils,
+  clase_cabecera,
+  xml.XMLDoc;
+
+ Type TLogCabecera = class (TInterfacedObject, ILogicaCabecera)
+     private
+
+     public
+     Function GenerarXML(Cabecera:Tcabecera):TXMLDocument;
+ end;
+implementation
+Function TlogCabecera.GenerarXML(Cabecera: TCabecera): TXMLDocument;
+Begin
+   // generar XML de la cabecera
+End;
+end.

@@ -1,0 +1,14 @@
+unit logica_cabecera;
+
+
+interface
+ uses classes, sysutils,
+  clase_cabecera,
+  xml.XMLDoc;
+ type TLogicaCabecera = interface
+      ['{6CC4BE17-4B3D-4A16-8792-8C27D6439864}']
+      Function GenerarXML(Cabecera:Tcabecera):TXMLDocument;
+ end;
+implementation
+
+end.

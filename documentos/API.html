@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentación API Verifactu SDK</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="buscar.js" defer></script>
+</head>
+<body>
+    <h1>Documentación API Verifactu Delphi SDK 0.1.112 (RAW)</h1>
+    <nav id="clasesSDK"><b>Clases del SDK Disponibles</b>
+		<ul>
+		<table>	
+		   <tr>
+				<td>
+					<li>TVersion</li>
+					<li>TIDFactura</li>
+					<li>TCabecera</li>
+					<li>Unidad Logica[D]</li>
+				</td>
+				<td>
+					<li>TImporteRectificacion[R]</li>
+					<li>TTercero</li>
+					<li>TFacturasRectificadas</li>
+					<li>TFacturasSustiuidas</li>
+				</td>
+				<td>
+					<li>TDestinatarios[R]</li>
+					<li>TEncadenamiento[R]</li>
+					<li>TRegistroAlta[R]</li>
+					<li>TXMLFactura[R]</li>
+				</td>
+				<td>
+					<li>THuella</li>
+					<li>TDatosHuella[DR]</li>
+					<li>TDesglose[DR]</li>
+					<li>TRegistroAnulacion[D]</li>
+				</td>
+				<td>
+					<li>TEventos[D]</li>
+					<li>TSoap[D]</li>
+					<li><b id="archivo">[D]</b>En Desarrollo</li>
+					<li><b id="archivo">[R]</b>En Revisión</li>
+				</td>
+			</tr>
+		</table>
+		</ul>
+		
+    </nav>    
+    <input type="text" id="search" placeholder="Buscar clase, metodo o unidad..."> 
+	<h2>Clases, Métodos y Unidades</h2>
+    <br>
+												<!--  Clase Tversion -->
+<div class="Tversion">
+    <table class="Tversion">
+        <h2>Clase Tversion</h2>
+		<b id="archivo">clase_Version.pas</b>
+        <thead>
+            <tr>
+                <th>Clase</th>
+                <th>Propiedad/Metodo</th>
+                <th>Descripción</th>
+                <th>Formato</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b>Tversion</b></td>
+                <td>class function NumeroVersion: string</td>
+                <td>Funcion que devuelve la version del SDK en formato numerico.</td>
+                <td>00.00.000 => XX : Version Principal, YY: Subversion. ZZZ: Correcciones</td>
+            </tr>
+            <tr>
+                <td><b>Tversion</b></td>
+                <td>class function TipoVersion: string;</td>
+                <td>Funcion que devuelve el tipo de version</td>
+                <td>El tipo de version es: Alpha, Beta, RC (Release Candidate), Final</td>
+            </tr>
+            <tr>
+                <td><b>Tversion</b></td>
+                <td>class function FechaVersion: string</td>
+                <td>Funcion que devuelve la fecha de la version</td>
+                <td>Fecha en formato dd-mm-yyyy</td>
+            </tr>
+        </tbody>
+    </table>
+    <b>Ejemplo de Uso</b>
+    <p>A continuación, un ejemplo básico de cómo usar la clase <code><b>Tversion</b></code> en Delphi:</p>
+    <pre>
+        <code id="codigo">
+            uses clase_version;
+            Procedure version;
+            begin
+                Showmessage(Tversion.NumeroVersion);
+            end;
+        </code>
+    </pre><br>
+</div>
+												<!--  Clase UnidadLogica -->
+<div class="unidadLogica">
+	<table class="unidadLogica">
+	
+	<h2>Unidad Logica</h2>
+	<b id="archivo">unidad_logica.pas</b>
+			<thead>
+				<tr>
+					<th>Clase</th>
+					<th>Propiedad/Metodo</th>
+					<th>Descripción</th>
+					<th>Formato</th>
+				</tr>
+			</thead>
+		<tbody>
+				<tr>
+					<td><b>Unidad Logica</b></td>
+					<td>Function ValidarNIF(NIF: string): Boolean;</td>
+					<td>Funcion de la capa logica de negocio</td>
+					<td><code>Devuelve True si el NIF es valido y False si no lo es.</code></td>
+				</tr>
+		</tbody>
+	</table><br>
+</div>
+												<!--  Clase TCabacera -->
+<div Class="TCabecera">
+	<table Class="TCabecera">
+	   <h2>Clase TCabecera</h2>
+	   <b id="archivo">clase_Cabecera.pas</b>
+			<thead>
+				<tr>
+					<th>Clase</th>
+					<th>Propiedad/Metodo</th>
+					<th>Descripción</th>
+					<th>Formato</th>
+				</tr>
+			</thead>
+		<tbody>
+			   <tr>
+					<td><b>TCabecera</b></td>
+					<td>constructor Create(NombreRazon: string; NIF: string)</td>
+					<td>Constructor de la clase, valida NombreRazon y NIF para que esten dentro de los formatos correspondientes.</td>
+					<td><code>Nombre Razon [120], NIF[9] en formato NIF España</code></td>
+				</tr>
+				<tr>
+					<td><b>TCabecera</b></td>
+					<td>destructor Destroy; override;</td>
+					<td>Destructor de la clase</td>
+					<td><code>La clase principal TRegistroAlta en su destructor libera todas las subclases.</code></td>
+				</tr>
+				<tr>
+					<td><b>TCabecera</b></td>
+					<td>procedure Free;</td>
+					<td>Procedimiento para liberar la clase</td>
+					<td><code>La clase principal TRegistroAlta en su destructor libera todas las subclases.</code></td>
+				</tr>
+				  <tr>
+					<td><b>TCabecera</b></td>
+					<td>  Procedure SETRepresentanteNombre(NombreRazon:string)</td>
+					<td>Procedure Setter que genera el Nombre de la empresa o persona física.</td>
+					<td><code>Alfanumérico [120]</code></td>
+				</tr>
+				<tr>
+					<td><b>TCabecera</b></td>
+					<td>Procedure SETRepresentanteNIF(NIF:string)</td>
+					<td>Procedure Setter que genera el NIF de la empresa o persona física.</td>
+					<td><code>Alfanumérico[9] NIF</code></td>
+				</tr>
+				<tr>
+					<td><b>TCabecera</b></td>
+					<td>SETFechaFinVerifactu(Fecha:TDate)</td>
+					<td>Procedure Setter FechaFInVerifactu</td>
+					<td><code>TDate Formato dd-mm-yyyy</code></td>
+				</tr>
+				 <tr>
+					<td><b>TCabecera</b></td>
+					<td>SETIncidencia(incidencia:boolean)</td>
+					<td>Procedure Setter HayIncidencia</td>
+					<td><code>Boolean. Indica si ha habido alguna incidencia</code></td>
+				</tr>
+				<tr>
+					<td><b>TCabecera</b></td>
+					<td>ObligadaEmision_NombreRazon</td>
+					<td>Setter y Getter de Nombre Razon del nodo ObligadaEmision</td>
+					<td><code>Alfanumérico [160]</code></td>
+				</tr>
+				<tr>
+					<td><b>TCabecera</b></td>
+					<td>ObligadaEmision_NIF</td>
+					<td>Property Setter y Getter : NIF del nodo ObligadaEmision</td>
+					<td><code>Alfanumérico [9] formato NIF</code></td>
+				</tr>
+				<tr>
+					<td><b>TCabecera</b></td>
+					<td>UsaRepresentante</td>
+					<td>Property Setter y Getter: Indicador Se esta usando un representante legal.</td>
+					<td><code>Boolean : True Hay representate y False si no lo hay</code></td>
+				</tr>
+				<tr>
+					<td><b>TCabecera</b></td>
+					<td>Representante_NombreRazon</td>
+					<td>Property Setter y Getter : NombreRazon del representante ( Se usa si UsaRepresentante es true).</td>
+					<td><code>Alfanumérico [160]</code></td>
+				</tr>
+				<tr>
+					<td><b>TCabecera</b></td>
+					<td>Representante_NIF</td>
+					<td>Property Setter y Getter: NIF del representante ( Se usa si UsaRepresentante es true).</td>
+					<td><code>Alfanumérico [9] formato NIF</code></td>
+				</tr>
+				<tr>
+					<td><b>TCabecera</b></td>
+					<td>RemisionVoluntaria_FechaFinVerifactu</td>
+					<td>Property Setter y Getter : En el caso de Realizarse la Remision Voluntaria, se indica la fecha de finalizacion</td>
+					<td><code>Fecha formato dd-mm-yyyy</code></td>
+				</tr>
+				<tr>
+					<td><b>TCabecera</b></td>
+					<td>HayIncidencia</td>
+					<td>Property Setter y Getter : Indica si se realiza la factura por una incidencia del sistema</td>
+					<td><code>Boolean : True si hay incidencia y false si no la hay.</code></td>
+				</tr>
+				<tr>
+					<td><b>TCabecera</b></td>
+					<td>RemisionVoluntaria_Incidencia</td>
+					<td>Property Getter y Setter : Indica si la Remision voluntaria se produce por una incidencia.</td>
+					<td><code>Char: S o N según hay o no incidencia (L4)</code></td>
+				</tr>
+				<tr>
+					<td><b>TCabecera</b></td>
+					<td>RequeridoPorEAT</td>
+					<td>Property Getter y Setter : Infica si se ha requerido por la Agencia Tributaria</td>
+					<td><code>Boolean: True si hay requerimiento y false si no lo hay.</code></td>
+				</tr>
+				<tr>
+					<td><b>TCabecera</b></td>
+					<td>RemisionRequerimiento_RefRequerimiento</td>
+					<td>Property Getter y Setter : Indica la referencia del requerimiento (si se ha requerido por la Agencia Tributaria)</td>
+					<td><code>Alfanumerico [120]</code></td>
+				</tr>
+				<tr>
+					<td><b>TCabecera</b></td>
+					<td>RemisionRequerimiento_FinRequerimiento</td>
+					<td>Property Getter y Setter : Indica si se ha finalizado el requerimiento (si se ha requerido por la Agencia Tributaria)</td>
+					<td><code>Char S o N (L4)</code></td>
+				</tr>
+			</Tbody>
+		</table>
+		<b>Ejemplo de Uso</b>
+		<p>A continuación, un ejemplo básico de cómo usar la clase <code><b>TCabecera</b></code> en Delphi:</p>
+		<pre>
+			<code id="codigo">
+				var
+				  Cabecera: TCabecera;
+				begin
+				  Cabecera := TCabecera.Create('Empresa','12345678Z');
+				  TCabecera.SETIncidencia:= false;
+				  TCabecera.UsaRepresentante :=False;
+				end;
+			</code>
+		</pre><br>
+</div>
+												<!-- Clase TIDFactura -->
+<div class="TIDFactura">	
+	<table class="TIDFactura">
+	<h2>Clase IDFactura</h2>
+	<b id="archivo">Clase_IDFactura.pas</b>
+		<thead>
+            <tr>
+                <th>Clase</th>
+                <th>Propiedad/Metodo</th>
+                <th>Descripción</th>
+                <th>Formato</th>
+            </tr>
+        </thead>
+		<Tbody>
+			<tr>
+                <td><b>TIDFactura</b></td>
+                <td>constructor Create(NIF: string; NSerie: string)</td>
+                <td>Constructor de la clase</td>
+                <td><code>Constructor de la clase, valida el NIF y el Numero de serie</code></td>
+            </tr>
+			<tr>
+                <td><b>TIDFactura</b></td>
+                <td>destructor Destroy; override;</td>
+                <td>Destructor de la clase</td>
+                <td><code>La clase principal TRegistroAlta en su destructor libera todas las subclases.</code></td>
+            </tr>
+			<tr>
+                <td><b>TIDFactura</b></td>
+                <td>procedure Free;</td>
+                <td>Produre liberador de la clase</td>
+                <td><code>La clase principal TRegistroAlta en su destructor libera todas las subclases.</code></td>
+            </tr>
+			<tr>
+                <td><b>TIDFactura</b></td>
+                <td>IDEmisorFactura</td>
+                <td>Property Getter y Setter : Indica el NIF de la factura</td>
+                <td><code>Alfanumérico [9]formato NIF</code></td>
+            </tr>
+			<tr>
+                <td><b>TIDFactura</b></td>
+                <td>NumSerieFactura</td>
+                <td>Property Getter y Setter : Indica el Numero SerieFactura de la factura</td>
+                <td><code>Alfanumérico [60]</code></td>
+            </tr>
+			<tr>
+                <td><b>TIDFactura</b></td>
+                <td>FechaExpedicionFactura</td>
+                <td>Property Getter y Setter : Indica la Fecha Expedicion de la factura</td>
+                <td><code>Fecha formato dd-mm-yyyy</code></td>
+            </tr>
+        </tbody>
+    </table>
+	<b class="TIDFactura">Ejemplo de Uso</b>
+    <p class="TIDFactura">A continuación, un ejemplo básico de cómo usar la clase <code><b>TIDFactura</b></code> en Delphi:</p>
+    <pre class="TIDFactura">
+		<code id="codigo">
+			var
+			  IDFactura: TIDFactura;
+			begin
+			  IDFactura := TIDFactura.Create('12345678Z','serie0001');
+			end;
+		</code>
+	</pre>
+</div>
+												<!-- Clase TImporteRectificacion -->
+<div class="TImporteRectificacion">
+<table class="TImporteRectificacion">
+<h2>Clase TImporteRectificacion</h2>
+<b id="archivo">clase_ImporteRectificacion.pas</b>
+	<thead>
+           <tr>
+                <th>Clase</th>
+                <th>Propiedad/Metodo</th>
+                <th>Descripción</th>
+                <th>Formato</th>
+            </tr>
+	</thead>
+	<tbody>
+			<tr>
+                <td><b>TImporteRectificacion</b></td>
+                <td>Constructor Create(ANodoNecesario:boolean);Overload;</td>
+                <td>Constructor en el que el Nodo no es necesario ya que no se trata de una Rectificación.</td>
+                <td><code>Ha de indicarse ANodoNecesario como False en este constructor</code></td>
+            </tr>
+			<tr>
+                <td><b>TImporteRectificacion</b></td>
+                <td>Constructor Create(AnodoNecesario:Boolean;ABaseRectificada:currency;ACuotaRectificada:Currency;CuotaRecargoRectificado:currency);Overload;</td>
+                <td>Constructor en el que el Nodo  es necesario ya que  se trata de una Rectificación.</td>
+                <td><code>Ha de indicarse ANodoNecesario como True junto con  los demas datos requeridos en este constructor</code></td>
+            </tr>
+			<tr>
+                <td><b>TImporteRectificacion</b></td>
+                <td>Destructor Destroy; Override;</td>
+                <td>Destructor de la clase</td>
+                <td><code>La clase Registro alta tiene un destructor para todas las subclases.</code></td>
+            </tr>
+			<tr>
+                <td><b>TImporteRectificacion</b></td>
+                <td>Procedure Free;</td>
+                <td>Liberador de la clase</td>
+                <td><code>La clase Registro alta tiene un destructor para todas las subclases.</code></td>
+            </tr>
+			<tr>
+                <td><b>TImporteRectificacion</b></td>
+                <td>BaseRectificada</td>
+                <td>Property Getter y Setter : Base del Importe Rectificacion si hay Factura Rectificada</td>
+                <td><code>Currency : 12,2</code></td>
+            </tr>
+			<tr>
+                <td><b>TImporteRectificacion</b></td>
+                <td>CuotaRectificada</td>
+                <td>Property Getter y Setter : Cuota del Importe Rectificacion si hay Factura Rectificada</td>
+                <td><code>Currency : 12,2</code></td>
+            </tr>
+			<tr>
+                <td><b>TImporteRectificacion</b></td>
+                <td>CuotaRecargoRectificado</td>
+                <td>Property Getter y Setter : Cuota Recargo del Importe Rectificacion si hay Factura Rectificada</td>
+                <td><code>Currency : 12,2</code></td>
+            </tr>
+			<tr>
+                <td><b>TImporteRectificacion</b></td>
+                <td>NodoNecesario</td>
+                <td>Property Getter y Setter : Indica si es necesario este nodo xml al haber o no Importe Rectificacion</td>
+                <td><code>Boolean: True es necesario y False no es necesario ( ver constructores)</code></td>
+            </tr>
+	</tbody>
+</table>
+
+	<b>Ejemplo de Uso</b>
+		<p>A continuación, un ejemplo básico de cómo usar la clase <code><b>TImporteRectificacion</b></code> en Delphi:</p>
+		<pre>
+			<code id="codigo">
+				var
+				  ImporteRectificacion: TImporteRectificacion;
+				begin
+				  ImporteRectificacion := TImporteRectificacion.Create(False);
+				end;
+			</code>
+					<code id="codigo">
+				var
+				  ImporteRectificacion: TImporteRectificacion;
+				begin
+				  ImporteRectificacion := TImporteRectificacion.Create(True ,10.50, 10.50,10.50);
+				end;
+			</code>
+		</pre><br>
+</div>
+												<!-- Clase TTercero -->
+<div class="TTercero">
+	<table class="TTercero">
+	<h2>Clase TTercero</h2>
+	<b id="archivo">clase_Tercero.pas</b>
+	<thead>
+           <tr>
+                <th>Clase</th>
+                <th>Propiedad/Metodo</th>
+                <th>Descripción</th>
+                <th>Formato</th>
+            </tr>
+	</thead>
+	<tbody>
+			<tr>
+                <td><b>TTercero</b></td>
+                <td>Constructor Create(ANodoNecesario:boolean);Overload;</td>
+                <td>Constructor de la clase</td>
+                <td><code>ANodoNecesario debe ser false si no hay Tercero en la factura.</code></td>
+            </tr>
+			<tr>
+                <td><b>TTercero</b></td>
+                <td>Constructor Create(ANodoNecesario:boolean;NombreRazon:string;NIF:string);Overload;</td>
+                <td>Constructor de la clase</td>
+                <td><code>ANodoNecesario debe ser True si no hay Tercero en la factura y además debe indicarse NombreRazon y NIF</code></td>
+            </tr>
+			<tr>
+                <td><b>TTercero</b></td>
+                <td>Destructor Destroy;Override;</td>
+                <td>Destructor de la clase</td>
+                <td><code>La clase TRegistroAlta tiene un destructor de todas las subclases</code></td>
+            </tr>
+			<tr>
+                <td><b>TTercero</b></td>
+                <td>NombreRazon</td>
+                <td>Property Getter y Setter : Nombre Razon del Tercero</td>
+                <td><code>Alfanumerico[120]</code></td>
+            </tr>
+			<tr>
+                <td><b>TTercero</b></td>
+                <td>NIF</td>
+                <td>Property Getter y Setter : NIF del Tercero</td>
+                <td><code>Alfanumerico[9] formato NIF</code></td>
+            </tr>
+				<tr>
+                <td><b>TTercero</b></td>
+                <td>IDOtro_CodigoPais</td>
+                <td>Property Getter y Setter : IDOtro CodigoPais del Tercero indicando si es de otro pais (ISO 3166-1 alpha-2 codes) </td>
+                <td><code>Alfanumerico[2] codigo del pais</code></td>
+            </tr>
+			<tr>
+                <td><b>TTercero</b></td>
+                <td>IDOtro_IDType</td>
+                <td>Property Getter y Setter : IDOtro Clave para establecer el tipo de identificación del tercero en el país de residencia.</td>
+                <td><code>Alfanumerico[2] </code></td>
+            </tr>
+			<tr>
+                <td><b>TTercero</b></td>
+                <td>IDOtro_ID</td>
+                <td>Property Getter y Setter :Número de identificación del tercero en el país de residencia..</td>
+                <td><code>Alfanumerico[20] </code></td>
+            </tr>
+	</tbody>
+	</table>
+	<b>Ejemplo de Uso</b>
+		<p>A continuación, un ejemplo básico de cómo usar la clase <code><b>TTercero</b></code> en Delphi:</p>
+		<pre>
+			<code id="codigo">
+				var
+				  Tercero: TTercero;
+				begin
+				  Tercero := TTercero.Create(False);
+				end;
+			</code>
+					<code id="codigo">
+				var
+				  Tercero: TTercero;
+				begin
+				  Tercero := TTercero.Create(True,'Empresa Tercero','12345678Z');
+				end;
+			</code>
+		</pre><br>
+</div>
+											<!-- Clase TFacturasRectificadas -->
+<div class="TFacturasRectificadas">
+	<table Class="TFacturasRectificadas">
+		<h2>Clase TFacturasRectificadas</h2>
+		<b id="archivo">clase_FacturasRectificadas.pas</b>
+		<Thead>
+		    <tr>
+                <th>Clase</th>
+                <th>Propiedad/Metodo</th>
+                <th>Descripción</th>
+                <th>Formato</th>
+            </tr>
+		</thead>
+		<Tbody>
+			<tr>
+				<td>TFacturasRectificadas</td>
+				<td>constructor Create(ANodoNecesario:boolean);Overload;</td>
+				<td>Constructor de la clase TFacturasRectificadas</td>
+				<td>ANodoNecesario debe de ser False si no hay facturas rectificadas</td>
+			</tr>
+			<tr>
+				<td>TFacturasRectificadas</td>
+				<td>constructor Create(ANodoNecesario:boolean;NIF: string; NumSerie: string; Fecha: TDate);Overload;</td>
+				<td>Constructor de la clase TFacturasRectificadas</td>
+				<td>AnodoNecesario debe ser True si hay facturas rectificadas y se debe indicar el NIF , NumSerie y la fecha.</td>
+			</tr>
+			<tr>
+				<td>TFacturasRectificadas</td>
+				<td>destructor Destroy; override;</td>
+				<td>destructor de la clase TFacturasRectificadas</td>
+				<td>La clase TRegistroAlta tiene un destructor de todas las subclases.</td>
+			</tr>
+			<tr>
+				<td>TFacturasRectificadas</td>
+				<td>IDEmisorFactura</td>
+				<td>Property Getter y Setter ID Emisor Factura</td>
+				<td>Alfanumérico [9] formato NIF</td>
+			</tr>
+			<tr>
+				<td>TFacturasRectificadas</td>
+				<td>NumSerieFactura</td>
+				<td>Property Getter y Setter Numero de Serie Factura</td>
+				<td>Alfanumérico [60]</td>
+			</tr>
+			<tr>
+				<td>TFacturasRectificadas</td>
+				<td>FechaExpedicionFactura</td>
+				<td>Property Getter y Setter  Fecha Expedicion Factura</td>
+				<td>Fecha formato dd-mm-yyyy</td>
+			</tr>
+		   	<tr>
+				<td>TFacturasRectificadas</td>
+				<td>NodoNecesario</td>
+				<td>Property Getter y Setter indicador de si el  Nodo XML es Necesario</td>
+				<td>Boolean : False si no hay factura rectificada y true si hay factura rectificada</td>
+			</tr>
+			   <tr> 
+				<td>TFacturasRectificadas</td>
+				<td>procedure Free;</td>
+				<td>Liberador de la clase TFacturasRectificadas</td>
+				<td>La clase TRegistroAlta tiene un destructor de todas las subclases.</td>
+			</tr>
+		</Tbody>
+	</table>
+	<b>Ejemplo de Uso</b>
+		<p>A continuación, un ejemplo básico de cómo usar la clase <code><b>TFacturasRectificadas</b></code> en Delphi:</p>
+		<pre>
+			<code id="codigo">
+				var
+				  FacturasRectificadas: TFacturasRectificadas;
+				begin
+				  FacturasRectificadas := TFacturasRectificadas.Create(False);
+				end;
+			</code>
+			<code id="codigo">
+				var
+				  FacturasRectificadas: TFacturasRectificadas;
+				begin
+				  FormatDateTime('dd-mm-yyyy',now);
+				  FacturasRectificadas := TFacturasRectificadas.Create(True,'12345678Z','numserie001',now);
+				end;
+			</code>
+		</pre><br>
+</div>
+											<!-- Clase TFacturasSustiuidas-->
+<div class="TFacturasSustiuidas">
+	<table Class="TFacturasSustiuidas">
+	<h2>Calse TFacturasSustiuidas</h2>
+	<b id="archivo">clase_FacturasSustituidas.pas</b>
+		<Thead>
+		</thead>
+			<tr>
+				<th>Clase</th>
+                <th>Propiedad/Metodo</th>
+                <th>Descripción</th>
+                <th>Formato</th>
+			</tr>
+		</body>
+			<tr>
+				<td>TFacturasSustiuidas</td>
+				<td>Constructor Create(ANodoNecesario:boolean);Overload;</td>
+				<td>Constructor de la clase TFacturasSustiuidas</td>
+				<td>ANodoNecesario debe ser False si no hay facturas sustituidas.</td>
+			</tr>
+			<tr>
+				<td>TFacturasSustiuidas</td>
+				<td>Constructor Create(ACantidadFacturas:integer;ANodoNecesario:boolean;NIF:String;Numserie:string;Fecha:Tdate);Overload;</td>
+				<td>Constructor de la clase TFacturasSustiuidas</td>
+				<td>AnodoNecesario debeser True si hay facturas sustituidas y se debe indicar el NIF, Número de serie y la fecha de las facturas.</td>
+			</tr>
+				<tr>
+				<td>TFacturasSustiuidas</td>
+				<td> Destructor Destroy;Override;</td>
+				<td> Destructor de la clase TFacturasSustiuidas</td>
+				<td>La clase TRegistroAlta tiene un destructor para todas las subclases.</td>
+			</tr>
+			<tr>
+				<td>TFacturasSustiuidas</td>
+				<td>IDEmisorFactura</td>
+				<td>Property Getter y Setter de la ID Emisor de la Factura Sustituida</td>
+				<td>Alfanumérico [9] Formato NIF</td>
+			</tr>
+			<tr>
+				<td>TFacturasSustiuidas</td>
+				<td>NumSerieFactura</td>
+				<td>Property Getter y Setter del Número de serie de la factura sustituida</td>
+				<td>Alfanumérico [60]</td>
+			</tr>
+			<tr>
+				<td>TFacturasSustiuidas</td>
+				<td>FechaExpedicionFactura</td>
+				<td>Property Getter y Setter de la fecha de expedición de la factura sustituida</td>
+				<td>Fecha dormato dd-mm-yyyy</td>
+			</tr>
+			<tr>
+				<td>TFacturasSustiuidas</td>
+				<td>NodoNecesario</td>
+				<td>Property Getter y setter indicador de si es necesario utilizar este nodo en el XML de la factura</td>
+				<td>True si hay factura/s sustituida/s y false si no la/s hay</td>
+			</tr>
+			<tr>
+				<td>TFacturasSustiuidas</td>
+				<td>CantidadFacturas</td>
+				<td>Property Getter y Setter indicador de la cantidad de facturas sustituidas (1-1000).</td>
+				<td>Entero con un valor de 1 a 1000 (ambos incluidos)</td>
+			</tr>
+		</tbody>
+	</table>
+	<b>Ejemplo de Uso</b>
+		<p>A continuación, un ejemplo básico de cómo usar la clase <code><b>TFacturasSustiuidas</b></code> en Delphi:</p>
+		<pre>
+			<code id="codigo">
+				var
+				  FacturasSustiuidas: TFacturasSustiuidas;
+				begin
+				  FacturasSustiuidas := TFacturasSustiuidas.Create(False);
+				end;
+			</code>
+			<code id="codigo">
+				var
+				  TFacturasSustiuidas: TFacturasSustiuidas;
+				begin
+				  FormatDateTime('dd-mm-yyyy',now);
+				  TFacturasSustiuidas := TFacturasSustiuidas.Create(1,True,'12345678Z','1234factsustituida',now);
+				end;
+			</code>
+		</pre><br>
+</div>
+										<!-- Clase TDestinatarios -->
+<div class="TDestinatarios">
+	<table Class="TDestinatarios"><h2>Clase TDestinatarios</h2>
+	<b id="archivo">clase_Destinatarios.pas</b><br>
+		<Thead>
+		</thead>
+			<tr>
+				<th>Clase</th>
+                <th>Propiedad/Metodo</th>
+                <th>Descripción</th>
+                <th>Formato</th>
+			</tr>
+		</body>
+			<tr>
+				<td>TDestinatarios</td>
+				<td>Constructor Create(ANodoNecesario:boolean);Overload;</td>
+				<td>Constructor de la clase TDestinatarios</td>
+				<td>Si el nodo no es necesario, solo hay que indicar ANodoNecesario False</td>
+			</tr>
+			<tr>
+				<td>TDestinatarios</td>
+				<td>Constructor Create(ANodoNecesario:boolean;ANombreRazon:string;ANIF:string;Cantidad:integer);Overload;</td>
+				<td>Constructor de la calse TDestinatarios</td>
+				<td>Si el Nodo es necesaro, ANodoNecesario debe ser True y además hay que indicar NombreRazon, NIF y cantidad</td>
+			</tr>
+			<tr>
+				<td>TDestinatarios</td>
+				<td>Destructor Destroy;Override;</td>
+				<td>Destructor de la clase TDestinatarios</td>
+				<td>La clase TRegistroAlta tiene un destructor para todas las subclases.</td>
+			</tr>
+			<tr>
+				<td>TDestinatarios</td>
+				<td>Procedure Free</td>
+				<td>Liberador de la clase TDestinatarios</td>
+				<td>La clase TRegistroAlta tiene un destructor para todas las subclases.</td>
+			</tr>
+			<tr>
+				<td>TDestinatarios</td>
+				<td>CantidadDestinatarios</td>
+				<td>Property Getter y setter indicador de la cantidad de destinatarios que hay.</td>
+				<td>Entero , debe de ser un valor entre 1 y 1000 (ambos incluidos)</td>
+			</tr>
+			<tr>
+				<td>TDestinatarios</td>
+				<td>NombreRazon</td>
+				<td>Property Getter y Setter del Nombre Razon del destinatario</td>
+				<td>Alfanumérico[120]</td>
+			</tr>
+			<tr>
+				<td>TDestinatarios</td>
+				<td>NIF</td>
+				<td>Property Getter y Setter del NIF del Destinatario</td>
+				<td>Alfanumérico [9], formato NIF</td>
+			</tr>
+			<tr>
+				<td>TDestinatarios</td>
+				<td>IDOtro_CodigoPais</td>
+				<td>Property Getter y Setter del código de pais (ISO 3166-1 alpha-2 codes)</td>
+				<td>Alfanumérico [2]</td>
+			</tr>
+			<tr>
+				<td>TDestinatarios</td>
+				<td>IDOtro_IDType</td>
+				<td>Property Getter y Setter del Tipo ID del pais del Destinatario</td>
+				<td>Alfanumérico[2]</td>
+			</tr>
+			<tr>
+				<td>TDestinatarios</td>
+				<td>IDOtro_ID</td>
+				<td>Property Getter y Setter de la ID del destinatarios</td>
+				<td>Alfanumérico [20]</td>
+			</tr>
+			<tr>
+				<td>TDestinatarios</td>
+				<td>NodoNecesario</td>
+				<td>Property Getter y Setter indicador del Nodo XML Destinatarios de la factura</td>
+				<td>True indica que es necesario ya que hay almenos un destinatario y false indicda que no hay destinatarios.</td>
+			</tr>
+		</tbody>
+	</table>
+		<b>Ejemplo de Uso</b>
+		<p>A continuación, un ejemplo básico de cómo usar la clase <code><b>TDestinatarios</b></code> en Delphi:</p>
+		<pre>
+			<code id="codigo">
+				var
+				  Destinatarios: TDestinatarios;
+				begin
+				  Destinatarios := TDestinatarios.Create(False);
+				end;
+			</code>
+			<code id="codigo">
+				var
+				  TDestinatarios: TDestinatarios;
+				begin
+				  FormatDateTime('dd-mm-yyyy',now);
+				  TDestinatarios :=  TDestinatarios.Create(True,'destinatario1','12345678Z',1);
+				end;
+			</code>
+		</pre><br>
+</div>
+											<!-- Clase TEncadenamiento-->
+<div class="TEncadenamiento">
+	<table Class="TEncadenamiento"><h2>Clase TEncadenamiento</h2>
+	<b id="archivo">clase_Encadenamiento.pas</b><br>
+		<Thead>
+		</thead>
+			<tr>
+				<th>Clase</th>
+                <th>Propiedad/Metodo</th>
+                <th>Descripción</th>
+                <th>Formato</th>
+			</tr>
+		</body>
+			<tr>
+				<td>TEncadenamiento</td>
+				<td>Constructor Create;</td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>TEncadenamiento</td>
+				<td>Destructor Destroy;override;</td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>TEncadenamiento</td>
+				<td>Procedure Free</td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>TEncadenamiento</td>
+				<td>PrimerRegistro</td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>TEncadenamiento</td>
+				<td>HayRegistroAnterior</td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>TEncadenamiento</td>
+				<td>RegistroAnterior_IDEmisorFactura</td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>TEncadenamiento</td>
+				<td>RegistroAnterior_NumSerieFactura</td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>TEncadenamiento</td>
+				<td>RegistroAnterior_FechaExpedicionFactura</td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>TEncadenamiento</td>
+				<td>RegistroAnterior_Huella</td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+										<!-- Clase TRegistroAlta -->
+<div class="TRegistroAlta">
+	<table Class="TRegistroAlta"><h2>Clase TRegistroAlta</h2>
+	<b id="archivo">clase_RegistroAlta.pas</b><br>
+		<Thead>
+		</thead>
+			<tr>
+				<th>Clase</th>
+                <th>Propiedad/Metodo</th>
+                <th>Descripción</th>
+                <th>Formato</th>
+			</tr>
+		</body>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+									<!-- Clase TXMLFactura -->
+<div class="TXMLFactura">
+	<table Class="TXMLFactura"><h2>Clase TXMLFactura</h2>
+	<b id="archivo">clase_XMLFactura.pas</b><br>
+		<Thead>
+		</thead>
+			<tr>
+				<th>Clase</th>
+                <th>Propiedad/Metodo</th>
+                <th>Descripción</th>
+                <th>Formato</th>
+			</tr>
+		</body>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+										<!-- clase  THuella -->
+<div class="THuella">
+	<table Class="THuella"><h2>Clase THuella</h2>
+	<b id="archivo">clase_Huella.pas</b><br>
+		<Thead>
+		</thead>
+			<tr>
+				<th>Clase</th>
+                <th>Propiedad/Metodo</th>
+                <th>Descripción</th>
+                <th>Formato</th>
+			</tr>
+		</body>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+								<!-- Clase TDatosHuella -->
+<div class="TDatosHuella">
+	<table Class="TDatosHuella"><h2>Clase TDatosHuella</h2>
+	<b id="archivo">clase_Huella.pas</b><br>
+		<Thead>
+		</thead>
+			<tr>
+				<th>Clase</th>
+                <th>Propiedad/Metodo</th>
+                <th>Descripción</th>
+                <th>Formato</th>
+			</tr>
+		</body>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+												<!-- Clase TDesglose -->
+<div class="TDesglose">
+	<table Class="TDesglose">
+	<h2>Clase TDesglose</h2>
+	<b id="archivo">clase_Desglose.pas</b><br>
+		<Thead>
+		</thead>
+			<tr>
+				<th>Clase</th>
+                <th>Propiedad/Metodo</th>
+                <th>Descripción</th>
+                <th>Formato</th>
+			</tr>
+		</body>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<footer>
+	<P><small><b id="archivo">Contenido bajo Licencia MIT. Reservados todos los derechos DaMoRaDev ( David Morales )<b></small></p>
+	<P><a href="https://github.com/damoradev">https://github.com/damoradev</a></p>
+</footer>
+</body>
+</html>

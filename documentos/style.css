@@ -1,0 +1,117 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 20px;
+    margin: 0;
+    line-height: 1.6;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+nav button {
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #ddd;
+}
+
+#content {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+#archivo{
+color: #fca03d  ;	
+}
+#codigo{
+color: #08d04b ;
+text-align: left;
+border-style :dotted;
+border-color : #08d04b;
+border-width :1px;	
+}
+#clasesSDK{
+  color: #0073e6;	
+}
+h2 {
+    color: #0073e6;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+	 table-layout: fixed;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    word-break: break-word;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+code {
+    background-color: #f4f4f4;
+    padding: 5px;
+    font-family: monospace;
+    font-size: 16px;
+    display: block;
+    white-space: pre-wrap; /* Mantener los saltos de línea */
+    word-wrap: break-word; /* Asegura que las líneas largas no se salgan del contenedor */
+    margin-top: 20px;
+}
+
+pre {
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 16px;
+    overflow-x: auto; /* Si el código es muy largo, aparecerá una barra de desplazamiento horizontal */
+    margin: 20px 0;
+}
+
+p {
+    margin-bottom: 15px; /* Espacio adicional entre los párrafos */
+    line-height: 1.6;
+}
+#search {
+    padding: 10px;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.class-item {
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+footer{
+ border: 1px solid #ddd;
+ padding: 10px;
+}

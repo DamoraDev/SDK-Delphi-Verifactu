@@ -1,0 +1,31 @@
+unit unidad_logica;
+
+interface
+  Uses classes,system.SysUtils;
+  Function ValidarNIF(NIF: string): Boolean;
+
+implementation
+
+Function ValidarNIF(NIF: string): Boolean;
+var
+  Letra: Char;
+  Numeros: string;
+  Suma: Integer;
+  Resto: Integer;
+  DigitoControl: Char;
+begin
+  Result := False;
+  if Length(NIF) <> 9 then Exit;
+  Letra := NIF[1];
+  Numeros := Copy(NIF, 2, 7);
+  DigitoControl := NIF[9];
+  if not (Letra in ['X', 'Y', 'Z', 'A'..'H', 'J'..'U']) then Exit;
+  Suma := 0;
+  for var i := 1 to 7 do
+    Suma := Suma + StrToIntDef(Numeros[i], 0);
+  Resto := Suma mod 23;
+  DigitoControl := Chr(Resto + Ord('A'));
+  Result := DigitoControl = NIF[9];
+end;
+
+end.
