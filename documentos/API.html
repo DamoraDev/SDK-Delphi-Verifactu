@@ -774,60 +774,90 @@
 		</body>
 			<tr>
 				<td>TEncadenamiento</td>
-				<td>Constructor Create;</td>
-				<td></td>
-				<td></td>
+				<td>Constructor Create(APrimerRegistro:char);Overload;</td>
+				<td>Constructor de la clase</td>
+				<td>Hay que indicar S si es el primer registro, ya que no hay que indicar IDEmisor, NumSerie ni Fecha factura</td>
+			</tr>
+			<tr>
+				<td>TEncadenamiento</td>
+				<td>Constructor Create(APrimerRegistro:char;IDEmisor:string;NumSerie:string;Fecha:TDate;Huella:string);Overload;</td>
+				<td>Constructor de la clase</td>
+				<td>Hay que indicar N al no ser el primer registro, ya  hay que indicar IDEmisor, NumSerie ni Fecha factura</td>
 			</tr>
 			<tr>
 				<td>TEncadenamiento</td>
 				<td>Destructor Destroy;override;</td>
-				<td></td>
-				<td></td>
+				<td>Destructor de la clase</td>
+				<td>No esta incluido en TRegistroAlta, pero esta ultima clase libera todas las subclases que contiene</td>
 			</tr>
 			<tr>
 				<td>TEncadenamiento</td>
 				<td>Procedure Free</td>
-				<td></td>
-				<td></td>
+				<td>Liberador de la Clase</td>
+				<td>No esta incluido en TRegistroAlta, pero esta ultima clase libera todas las subclases que contiene</td>
 			</tr>
 			<tr>
 				<td>TEncadenamiento</td>
 				<td>PrimerRegistro</td>
-				<td></td>
-				<td></td>
+				<td>Property Getter y Setter indicador de si es la primera factura que se emite</td>
+				<td>Es de tipo char: S o N , indican si es el primer registro. Por defecto su valor es N en el constructor</td>
 			</tr>
 			<tr>
 				<td>TEncadenamiento</td>
-				<td>HayRegistroAnterior</td>
-				<td></td>
-				<td></td>
+				<td>SETHayRegistroAnterior</td>
+				<td>Property Privada Setter indicador de la existencia de una factura anterior.</td>
+				<td>Su uso actual es para determinar S o N en PrimerRegistro.</td>
+			</tr>
+			<tr>
+				<td>TEncadenamiento</td>
+				<td>GETHayRegistroAnterior</td>
+				<td>Property Publico Getter indicador de la existencia de una factura anterior.</td>
+				<td>Su uso actual es para determinar S o N en PrimerRegistro.</td>
 			</tr>
 			<tr>
 				<td>TEncadenamiento</td>
 				<td>RegistroAnterior_IDEmisorFactura</td>
-				<td></td>
-				<td></td>
+				<td>Property Getter y Setter del NIF del Eimisor de la factura.</td>
+				<td>Alfanumérico[9] formato NIF</td>
 			</tr>
 			<tr>
 				<td>TEncadenamiento</td>
 				<td>RegistroAnterior_NumSerieFactura</td>
-				<td></td>
-				<td></td>
+				<td>Property Getter y Setter del Número de serie de la factura</td>
+				<td>Alfanumérico[60]</td>
 			</tr>
 			<tr>
 				<td>TEncadenamiento</td>
 				<td>RegistroAnterior_FechaExpedicionFactura</td>
-				<td></td>
-				<td></td>
+				<td>Property Getter y Setter indicador de la fecha de la factura</td>
+				<td>Es de tipo Date con formato dd-mm-yyyy</td>
 			</tr>
 			<tr>
 				<td>TEncadenamiento</td>
 				<td>RegistroAnterior_Huella</td>
-				<td></td>
-				<td></td>
+				<td>Property Getter y Setter de la huella del registro anterior si PrimerRegistro es N</td>
+				<td>Alfanumérico[64] hash.</td>
 			</tr>
 		</tbody>
 	</table>
+		<b>Ejemplo de Uso</b>
+		<p>A continuación, un ejemplo básico de cómo usar la clase <code><b>TEncadenamiento</b></code> en Delphi:</p>
+		<pre>
+			<code id="codigo">
+				var
+				  Encadenamiento: TEncadenamiento;
+				begin
+				  Encadenamiento := TEncadenamiento.Create('S');
+				end;
+			</code>
+				<code id="codigo">
+				var
+				  Encadenamiento: TEncadenamiento;
+				begin
+				  Encadenamiento := TEncadenamiento.Create('N','12345678Z','Numserie001',now);
+				end;
+			</code>
+		</pre><br>
 </div>
 										<!-- Clase TRegistroAlta -->
 <div class="TRegistroAlta">
