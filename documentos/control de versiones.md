@@ -2,9 +2,9 @@
 
 1. **Versionado del API**:
    
-   - Puedes seguir el esquema de **semver** (versionado semántico), que es común para APIs, lo que te ayudará a gestionar las versiones de tu API de manera consistente.
+   - Esquema de **semver** (versionado semántico).
      - **Mayor** (`X`): Cambios incompatibles en la API (por ejemplo, eliminar o modificar funciones existentes).
-     - **Menor** (`Y`): Nuevas funcionalidades que son retrocompatibles (por ejemplo, añadir nuevas clases o métodos sin afectar a los existentes).
+     - **Menor** (`Y`): Nuevas funcionalidades que son retrocompatibles (por ejemplo, añadir nuevas clases o métodos   sin afectar a los existentes).
      - **Patch** (`Z`): Corrección de errores, mejoras de rendimiento o pequeñas modificaciones sin alterar el comportamiento público de la API.
    
    Ejemplo de versionado:
@@ -15,6 +15,6 @@
 
 2. **Versionado de Clases**:
    
-   - Versionar cada clase individualmente es una excelente idea para tener un control más granular. Puedes hacerlo mediante el uso de un sufijo o un número de versión dentro de la clase.
+   - Versionar cada clase individualmente.
    - Por ejemplo, si tienes una clase llamada `Factura`, la versión 1.0 de esta clase podría ser `Factura_v1` y, después de realizar cambios o mejoras, la versión 2.0 podría ser `Factura_v2`.
    - Al usar este enfoque, es más fácil determinar qué versión de cada clase está en uso sin tener que versionar todo el SDK o la API a la vez.
