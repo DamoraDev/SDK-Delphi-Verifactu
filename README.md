@@ -1,4 +1,4 @@
-# SDK Verifactu
+![](documentos\verifactu%20SDK.png)
 
 **Versión del documento**: 0.1.0010
 
