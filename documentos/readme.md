@@ -1,4 +1,4 @@
-![](C:\felinotronica\recursos\verifactu%20SDK.png)
+![](verifactu%20SDK.png)
 
 # 
 
