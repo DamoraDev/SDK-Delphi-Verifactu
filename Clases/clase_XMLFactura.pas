@@ -217,6 +217,27 @@ begin
        ChildNodes['Desglose'].AddChild('TipoRecargoEquivalencia').Text := FloatToStr(RegistroAlta.Desglose.TipoRecargoEquivalencia);
        ChildNodes['Desglose'].AddChild('CuotaRecargoEquivalencia').Text := FloatToStr(RegistroAlta.Desglose.CuotaRecargoEquivalencia);
     End;
+                                  { Encadenamiento }
+    if RegistroAlta.Encadenamiento.GETHayRegistroAnterior=true then
+        Begin
+          with NodoRegistroAlta.AddChild('Encadenamiento') do
+             Begin
+               AddChild('PrimerRegistro').Text:= RegistroAlta.Encadenamiento.PrimerRegistro;
+               AddChild('RegistroAnterior');
+               ChildNodes['RegistroAnterior'].AddChild('IDEmisorFactura').Text := RegistroAlta.Encadenamiento.RegistroAnterior_IDEmisorFactura;
+               childNodes['RegistroAnterior'].AddChild('NumSerieFactura').Text := RegistroAlta.Encadenamiento.RegistroAnterior_NumSerieFactura;
+               childNodes['RegistroAnterior'].AddChild('FechaExpedicionFactura').Text := FormatDateTime('dd-mm-yyyy',RegistroAlta.Encadenamiento.RegistroAnterior_FechaExpedicionFactura);
+               childNodes['RegistroAnterior'].AddChild('Huella').Text := RegistroAlta.Encadenamiento.RegistroAnterior_Huella;
+             End
+          end
+          else
+           begin
+             with NodoRegistroAlta.AddChild('Encadenamiento') do
+                begin
+                  AddChild('PrimerRegistro').Text:=RegistroAlta.Encadenamiento.PrimerRegistro;
+                end;
+           end;
+
     //fileName := Format('factura_%d_%s.xml', [cantidadFacturas, TVersion.NumeroVersion]);
     fileName := Format('factura_%d.xml', [cantidadFacturas]);
     XMLDoc.SaveToFile(fileName);
