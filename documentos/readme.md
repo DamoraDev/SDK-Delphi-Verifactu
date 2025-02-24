@@ -1,6 +1,8 @@
-## # SDK Verifactu
+![](C:\felinotronica\recursos\verifactu%20SDK.png)
 
-**Versión del documento**: 0.1.0010
+# 
+
+**Versión del documento**: 0.1.0015
 
 ## Objetivo
 
@@ -36,17 +38,18 @@ La versión DLL se distribuirá junto con su **hash**, y se proporcionará una f
 - **Creación de Interfaces y clases para los nodos XML compatibles con el sistema Verifactu**: [En proceso].
 - **Elaboración de la documentación necesaria para el uso del SDK**: [En proceso].
 - **Test VCL de la estructura del XML Verifactu**: [En proceso].
-- **Test de Huella Hash SHA256**: [Pendiente].
+- **Test de Huella Hash SHA256**: [En Proceso].
 - **Test de firma digital del documento**: [Pendiente].
 - **Registro de eventos**: [En proceso].
 - **Test de envíos de facturas mediante servicio SOAP**: [Pendiente].
 - **Implementar la gestión de eventos**: [Pendiente].
 - **Añadir soporte ODBC y ADO con FireDac**: [Pendiente].
 - **Convertir el SDK a DLL**: [Pendiente].
+- **Clase TAuditoria :** Control de errores[ En proceso], autodiagnostico de todo el SDK, conexiones a bases de datos[*Sqlite, MongoDB,MySQL, SQLServer,PosgreSQL, MsAcces*] y generacion de token con payload de los datos para tablas o cluster de auditoria[pendiente]
 
 ## Versiones
 
-- **Versión actual (Alpha)**: Actualmente en la versión **00.01.112**. Se está trabajando en el diseño de las interfaces y clases, y en su testeo. Una vez esté todo completo, se pasará a la fase Beta.
+- **Versión actual (Alpha)**: Actualmente en la versión **00.01.115**. Se está trabajando en el diseño de las interfaces y clases, y en su testeo. Una vez esté todo completo, se pasará a la fase Beta.
 - **Versión Beta**: Generación de documentos con huella y firma.
 - **Versión RC (Release Candidate)**: Envío de documentos completos atendiendo al encadenamiento, tipo de factura, rectificaciones, subsanaciones, anulaciones, etc.
 - **Versión Final**: Resultados comprobados, con código optimizado por IA.
