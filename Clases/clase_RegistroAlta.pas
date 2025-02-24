@@ -7,7 +7,7 @@ uses
   clase_FacturasRectificadas,
   clase_FacturasSustituidas,
   clase_ImporteRectificacion,
-  clase_Desglose,
+  clase_Desglose,clase_Encadenamiento,
   clase_Tercero,clase_Destinatarios,
   unidad_logica;
 Type IRegistroAlta = Interface
@@ -47,6 +47,7 @@ type TRegistroAlta = class(TInterfacedObject,IRegistroAlta)
     FDestinatarios:TDestinatarios;
     FCupon:char;//120 L4  S/N
     FDesglose:TDesglose;
+    FEncadenamiento:TEncadenamiento;
   public
     property IDFactura: TIDFactura read FIDFactura write FIDFactura;
     property RefExterna: string read FRefExterna write FRefExterna;
@@ -71,10 +72,11 @@ type TRegistroAlta = class(TInterfacedObject,IRegistroAlta)
     property Destinatarios:TDestinatarios read FDestinatarios write FDestinatarios;
     Property Cupon:char read FCupon write Fcupon;
     Property Desglose:TDesglose read FDesglose write FDesglose;
+    Property Encadenamiento:TEncadenamiento read FEncadenamiento write FEncadenamiento;
    // constructor Create(AIDFactura: TIDFactura; RefExterna: string; TipoFactura: TFormatoFactura);
     constructor Create(ANombreRazonEMisor:string;AIDFactura: TIDFactura; RefExterna: string;TipoFactura: TFormatoFactura;
                        AFacturasRectificadas: TFacturasRectificadas;AFacturasSustituidas:TFacturasSustiuidas;
-                       ATercero:TTercero;ADestinatarios:TDestinatarios;AImporteRectificacion:TImporteRectificacion;ADesglose:TDesglose);
+                       ATercero:TTercero;ADestinatarios:TDestinatarios;AImporteRectificacion:TImporteRectificacion;ADesglose:TDesglose;AEncadenamiento:TEncadenamiento);
     destructor Destroy;Override;
     Procedure Free;
 
@@ -115,6 +117,8 @@ begin
       FreeAndNil(FImporteRectificacion);
     if assigned (FDesglose) then
       FreeAndNil (FDesglose);
+    if assigned (FEncadenamiento) then
+      FreeAndNil (FEncadenamiento);
   except
     on E: Exception do
       raise Exception.Create('Error al liberar RegistroAlta: ' + E.Message);
@@ -127,7 +131,7 @@ end;
 constructor TRegistroAlta.Create(ANombreRazonEMisor:string;AIDFactura: TIDFactura;
     RefExterna: string;TipoFactura: TFormatoFactura; AFacturasRectificadas: TFacturasRectificadas;
     AFacturasSustituidas:TFacturasSustiuidas;ATercero:TTercero;ADestinatarios:TDestinatarios;
-    AimporteRectificacion:TImporteRectificacion;ADesglose:Tdesglose);
+    AimporteRectificacion:TImporteRectificacion;ADesglose:Tdesglose;AEncadenamiento:TEncadenamiento);
 begin
   inherited Create;
   FIDversion:='1.0';
@@ -139,6 +143,7 @@ begin
   FDestinatarios:=ADestinatarios;
   FImporteRectificacion:=AImporteRectificacion;
   FDesglose:=ADesglose;
+  FEncadenamiento:=AEncadenamiento;
   // Validamos la longitud de RefExterna
   if Length(RefExterna) > 60 then
     raise Exception.Create('Error: Referencia Externa no debe superar los 60 caracteres.');
