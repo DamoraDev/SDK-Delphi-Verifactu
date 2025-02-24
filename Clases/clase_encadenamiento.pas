@@ -43,30 +43,33 @@ End;
                                    {  constructores sobrecargados }
 
 
-Constructor TEncadenamiento.Create(APrimerRegistro:char;IDEmisor:string;NumSerie:string;Fecha:TDate;Huella:string);
-Begin
-   if (APrimerRegistro<>'N')OR(APrimerRegistro<>'S') then
-        raise Exception.Create('Error: PRimerRegistro debe ser N o S');
-   if (APrimerRegistro='S')then
-        raise Exception.Create('Error:PrimerRegistro debe ser N si no hay registro anterior y no hay que indicar nigun otro dato. ');
-   PrimerRegistro:=APrimerregistro;
-   if PrimerRegistro='N' then  // hay registro anterior
-          begin
-             if not ValidarNIF(IDEmisor) then
-                 raise Exception.Create('NIF no válido');
-            if Numserie.Length>60 then
-                 raise Exception.Create('Error: NumSerie debe ser menor o igual a 60 caracteres.');
-            RegistroAnterior_IDEmisorFactura:=IDEmisor;
-            RegistroAnterior_NumSerieFactura:=NumSerie;
-            FormatDateTime('dd-mm-yyyy', Fecha);
-            RegistroAnterior_FechaExpedicionFactura:=Fecha;
-            RegistroAnterior_Huella:=Huella;
-            SETHayRegistroAnterior:=true;
-          end
-End;
+constructor TEncadenamiento.Create(APrimerRegistro: char; IDEmisor: string; NumSerie: string; Fecha: TDate; Huella: string);
+begin
+  if (APrimerRegistro <> 'N') and (APrimerRegistro <> 'S') then
+    raise Exception.Create('Error: PrimerRegistro debe ser N o S');
+  if (APrimerRegistro = 'S') then
+    raise Exception.Create('Error: PrimerRegistro debe ser N si no hay registro anterior y no hay que indicar ningún otro dato.');
+
+  PrimerRegistro := APrimerRegistro;
+
+  if PrimerRegistro = 'N' then  // hay registro anterior
+  begin
+    if not ValidarNIF(IDEmisor) then
+      raise Exception.Create('NIF no válido');
+    if NumSerie.Length > 60 then
+      raise Exception.Create('Error: NumSerie debe ser menor o igual a 60 caracteres.');
+
+    RegistroAnterior_IDEmisorFactura := IDEmisor;
+    RegistroAnterior_NumSerieFactura := NumSerie;
+    RegistroAnterior_FechaExpedicionFactura := Fecha;  // Asignar fecha directamente
+    RegistroAnterior_Huella := Huella;
+    SETHayRegistroAnterior := true;
+  end;
+end;
+
 Constructor TEncadenamiento.Create(APrimerRegistro:char);
 Begin
-   if (APrimerRegistro<>'N')OR(APrimerRegistro<>'S') then
+   if (APrimerRegistro<>'N')AND(APrimerRegistro<>'S') then
         raise Exception.Create('Error: PRimerRegistro debe ser N o S');
    if (APrimerRegistro='N')then
         raise Exception.Create('Error:PrimerRegistro debe ser S o indicar IDEmisor, NumSerie y Fecha del registro anterior');
