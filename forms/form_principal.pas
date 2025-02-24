@@ -30,6 +30,7 @@ type
     btnHuella: TButton;
     cboxHayDestinatarios: TCheckBox;
     cboxHayRequerimientoEAT: TCheckBox;
+    cboxEsPrimerRegistro: TCheckBox;
     procedure btnXMLFacturaClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
@@ -46,7 +47,7 @@ implementation
 {$R *.dfm}
 uses
   clase_cabecera, clase_RegistroAlta,clase_XMLFactura,clase_ImporteRectificacion,
-  clase_Tercero,clase_Destinatarios,clase_version,clase_desglose,
+  clase_Tercero,clase_Destinatarios,clase_version,clase_desglose,clase_encadenamiento,
   clase_IDFactura, clase_FacturasRectificadas,clase_FacturasSustituidas;
 
 
@@ -62,6 +63,7 @@ var
   Tercero:TTercero;
   Destinatarios:TDestinatarios;
   Desglose:TDesglose;
+  Encadenamiento:Tencadenamiento;
 begin
   XMLFactura := nil;
    try
@@ -79,6 +81,12 @@ begin
      Desglose.CuotaRepercutida:=100.50;
      Desglose.TipoRecargoEquivalencia:=100.50;
      Desglose.CuotaRecargoEquivalencia:=100.50;
+     // Encadenamiento
+     if cboxEsPrimerRegistro.Checked=true then encadenamiento:=Tencadenamiento.Create('S')
+        else
+           Begin
+             encadenamiento := Tencadenamiento.Create('N','12345678Z','SerieAnterior01',now,'aqui va el hash anterior') ;
+           End;
      // facturas Rectificadas
      if Assigned(cboxHayFacturasRectificadas) and (cboxHayFacturasRectificadas.Checked = true) then
           begin
@@ -107,7 +115,7 @@ begin
             Cabecera.RemisionRequerimiento_FinRequerimiento:='S'; //s o N
           End;
      //ShowMessage(' tercero') ;
-     RegAlta := TRegistroAlta.Create('Empresa Test',IDFactura,'refext001',fF2,FacturasRectificadas,FacturasSustituidas,Tercero,Destinatarios,ImporteRectificacion,Desglose);
+     RegAlta := TRegistroAlta.Create('Empresa Test',IDFactura,'refext001',fF2,FacturasRectificadas,FacturasSustituidas,Tercero,Destinatarios,ImporteRectificacion,Desglose,Encadenamiento);
      RegAlta.DescripcionOperacion:='Venta minorista en factura simplificada';
      RegAlta.FacturaSinIdentifDestinatarioArt61d:='N';
      RegAlta.FacturaSimplificadaArt7273:='N';
