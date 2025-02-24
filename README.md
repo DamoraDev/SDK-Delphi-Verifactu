@@ -43,6 +43,7 @@ La versión DLL se distribuirá junto con su **hash**, y se proporcionará una f
 - **Implementar la gestión de eventos**: [Pendiente].
 - **Añadir soporte ODBC y ADO con FireDac**: [Pendiente].
 - **Convertir el SDK a DLL**: [Pendiente].
+- **Clase TAuditoria :** Control de errores[ En proceso], autodiagnostico de todo el SDK, conexiones a bases de datos[*Sqlite, MongoDB,MySQL, SQLServer,PosgreSQL, MsAcces*] y generacion de token con payload de los datos para tablas o cluster de auditoria[pendiente]
 
 ## Versiones
 
