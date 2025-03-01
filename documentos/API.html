@@ -8,7 +8,7 @@
     <script src="buscar.js" defer></script>
 </head>
 <body>
-    <h1>Documentación API Verifactu Delphi SDK 0.1.112 (RAW)</h1>
+    <h1>Documentación API Verifactu Delphi SDK 0.1.120 (RAW)</h1>
     <nav id="clasesSDK"><b>Clases del SDK Disponibles</b>
 		<ul>
 		<table>	
@@ -18,30 +18,40 @@
 					<li>TIDFactura</li>
 					<li>TCabecera</li>
 					<li>Unidad Logica[D]</li>
+					<li>TRegistroEventos[D]</li>
 				</td>
 				<td>
 					<li>TImporteRectificacion[R]</li>
 					<li>TTercero</li>
 					<li>TFacturasRectificadas</li>
 					<li>TFacturasSustiuidas</li>
+					<li>Teventos[P]</li>
 				</td>
 				<td>
 					<li>TDestinatarios[R]</li>
 					<li>TEncadenamiento[R]</li>
-					<li>TRegistroAlta[R]</li>
+					<li>TRegistroAlta[DR]</li>
 					<li>TXMLFactura[R]</li>
+					
 				</td>
 				<td>
-					<li>THuella</li>
-					<li>TDatosHuella[DR]</li>
+					<li>THuella[DR]</li>
 					<li>TDesglose[DR]</li>
 					<li>TRegistroAnulacion[D]</li>
+					<li>Unidad_ListasV2[DR]</li>
 				</td>
 				<td>
-					<li>TEventos[D]</li>
-					<li>TSoap[D]</li>
+					<li>unidad_firma[P]</li>
+					<li>Taditoria[DR]</li>
+					<li>TDatosRegistroAlta</li>
+					<li>TDatosRegistroAnulacion</li>
+				</td>
+				<td>
+					<li>TEventos[P]</li>
+					<li>TSoap[P]</li>
 					<li><b id="archivo">[D]</b>En Desarrollo</li>
 					<li><b id="archivo">[R]</b>En Revisión</li>
+					<li><b id="archivo">[P]</b>Pendiente</li>
 				</td>
 			</tr>
 		</table>
@@ -873,11 +883,107 @@
 			</tr>
 		</body>
 			<tr>
+				<td>TRegistroAlta</td>
+				<td>constructor Create<br>(ANombreRazonEMisor:string;<br>AIDFactura: TIDFactura; <br>RefExterna: string;<br>TipoFactura: TFormatoFactura;<br>
+                       AFacturasRectificadas: TFacturasRectificadas;<br>AFacturasSustituidas:TFacturasSustiuidas;<br>
+                       ATercero:TTercero;<br>ADestinatarios:TDestinatarios;<br>AImporteRectificacion:TImporteRectificacion;<br>
+					   ADesglose:TDesglose;<br>AEncadenamiento:TEncadenamiento);</td>
+				<td>Constructor de la clase</td>
+				<td>Contiene los datos y clases necesarias para generar el XML RegistroAlta:
+				    <ul>
+						<li>ANombreRazonEMisor</li>
+						<li>AIDFactura</li>
+						<li>RefExterna</li>
+						<li>TipoFactura</li>
+						<li>AFacturasRectificadas</li>
+						<li>AFacturasSustituidas</li>
+						<li>ATercero</li>
+						<li>ADestinatarios</li>
+						<li>AImporteRectificacion</li>
+						<li>ADesglose</li>
+						<li>AEncadenamiento</li>
+						<li><b>[Huella]</b>En Desarollo</li>
+				   </ul>
+				</td>
+			</tr>
+			<tr>
+				<td>TRegistroAlta</td>
+				<td>destructor Destroy;Override;</td>
+				<td>Destructor de la clase</td>
+				<td>Este destructor contiene la liberacion ( destrucción ) de todas las subclases de TRegistroAlta: RegistroAlta.Free libera todas las subclases.</td>
+			</tr>
+			<tr>
+				<td>TRegistroAlta</td>
+				<td>Procedure Free</td>
+				<td>Liberador de la clase y las subclases</td>
+				<td>Libera de memoria todas las subclases y la propia clase TRegistoAlta.</td>
+			</tr>
+			<tr>
+				<td>TRegistroAlta</td>
+				<td>IDFactura</td>
+				<td>Property Getter y Setter de la Subclase TIDFactura</td>
+				<td>Contiene los datos necesarios para generar la parte del XML IDFactura</td>
+			</tr>
+			<tr>
+				<td>TRegistroAlta</td>
+				<td>RefExterna</td>
+				<td>Property Getter y Setter de la Referencia Externa de la factura</td>
+				<td>Alfanumérico [60]</td>
+			</tr>
+			<tr>
+				<td>TRegistroAlta</td>
+				<td>NombreRazonEmisor</td>
+				<td>Property Getter y Setter del Nombde o Razon del Emisor de la factura</td>
+				<td>Alfanumérico [120]</td>
+			</tr>
+			<tr>
+				<td>TRegistroAlta</td>
+				<td>GETSubsanacion</td>
+				<td>Getter  indicador de si hay subsanación</td>
+				<td>Su valor es S o N, tipo Char, si Subsanacion es N Rechazo Previo No puede ser X</td>
+			</tr>
+			<tr>
+				<td>TRegistroAlta</td>
+				<td>SETSubsanacion</td>
+				<td>Setter  indicador de si hay subsanación</td>
+				<td>Su valor es S o N, tipo Char, si Subsanacion es N Rechazo Previo No puede ser X</td>
+			</tr>
+			<tr>
+				<td>TRegistroAlta</td>
+				<td>GETRechazoPrevio</td>
+				<td>Getter indicador de si ha habido rechazo previo por el sistema.</td>
+				<td>Su valor es tipo char: S o N o X, si es X Subsanacion no puede ser N</td>
+			</tr>	
+			<tr>
+				<td>TRegistroAlta</td>
+				<td>SETRechazoPrevio</td>
+				<td>Setter indicador de si ha habido rechazo previo por el sistema.</td>
+				<td>Su valor es tipo char: S o N o X, si es X Subsanacion no puede ser N</td>
+			</tr>			
+			<tr>
+				<td>TRegistroAlta</td>
+				<td>TipoFactura</td>
+				<td>Property Getter y Setter del tipo de factura que se envia en el XML</td>
+				<td>Alfanumérico[2] lista L2</td>
+			</tr>	
+			<tr>
 				<td></td>
 				<td></td>
 				<td></td>
 				<td></td>
 			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>			
 		</tbody>
 	</table>
 </div>
@@ -959,6 +1065,29 @@
                 <th>Propiedad/Metodo</th>
                 <th>Descripción</th>
                 <th>Formato</th>
+			</tr>
+		</body>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+												<!-- Unidad Listas  -->
+<div class="unidad_listasv2">
+	<table Class="unidad_listas">
+	<h2>Unidad Listas( logica)</h2>
+	<b id="archivo">unidad_listas.pas</b><br>
+		<Thead>
+		</thead>
+			<tr>
+				<th>Enumeral</th>
+                <th>Función</th>
+                <th>Descripción</th>
+                <th>Valores</th>
 			</tr>
 		</body>
 			<tr>
