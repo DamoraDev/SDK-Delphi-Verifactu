@@ -48,7 +48,7 @@ implementation
 uses
   clase_cabecera, clase_RegistroAlta,clase_XMLFactura,clase_ImporteRectificacion,
   clase_Tercero,clase_Destinatarios,clase_version,clase_desglose,clase_encadenamiento,
-  clase_IDFactura, clase_FacturasRectificadas,clase_FacturasSustituidas;
+  clase_IDFactura, clase_FacturasRectificadas,clase_FacturasSustituidas,unidad_listasv2;
 
 
 procedure TFormPpal.btnXMLFacturaClick(Sender: TObject);
@@ -72,9 +72,9 @@ begin
      IDFactura := TIDFactura.Create('12345678Z','fact001test');
      Tercero := TTercero.Create(False);
      Desglose := TDesglose.Create(1,i01);
-     Desglose.ClaveRegimen:='01' ; // regimen general
-     Desglose.CalificacionOperacion:='S1'; // no exenta
-     Desglose.OperacionExenta :='';//no esta exenta
+     Desglose.ClaveRegimen:=TL8A.OperacionRegimenGeneral ; // regimen general
+     Desglose.CalificacionOperacion:= TL9.NoExenta_SinInversion_SujetoPasivo; // no exenta
+     Desglose.OperacionExenta :='';//no esta exenta  L10
      Desglose.TipoImpositivo :=100.50;
      Desglose.BaseImponibleOImporteNoSujeto:=0;
      Desglose.BaseImponibleACoste:=0;
@@ -82,10 +82,10 @@ begin
      Desglose.TipoRecargoEquivalencia:=100.50;
      Desglose.CuotaRecargoEquivalencia:=100.50;
      // Encadenamiento
-     if cboxEsPrimerRegistro.Checked=true then encadenamiento:=Tencadenamiento.Create('S')
+     if cboxEsPrimerRegistro.Checked=true then encadenamiento:=Tencadenamiento.Create(TL4.SI)
         else
            Begin
-             encadenamiento := Tencadenamiento.Create('N','12345678Z','SerieAnterior01',now,'aqui va el hash anterior') ;
+             encadenamiento := Tencadenamiento.Create(TL4.NO,'12345678Z','SerieAnterior01',now,'aqui va el hash anterior') ;
            End;
      // facturas Rectificadas
      if Assigned(cboxHayFacturasRectificadas) and (cboxHayFacturasRectificadas.Checked = true) then
@@ -111,16 +111,18 @@ begin
      if cboxHayrequerimientoEAT.Checked = true then
           Begin
             Cabecera.RequeridoPorEAT:=true;
-            Cabecera.RemisionRequerimiento_RefRequerimiento:=' ref requerimiento';
-            Cabecera.RemisionRequerimiento_FinRequerimiento:='S'; //s o N
+            Cabecera.RemisionRequerimiento_RefRequerimiento:='ref requerimiento';
+            Cabecera.RemisionRequerimiento_FinRequerimiento:=TL4.SI; //s o N
           End;
      //ShowMessage(' tercero') ;
      RegAlta := TRegistroAlta.Create('Empresa Test',IDFactura,'refext001',fF2,FacturasRectificadas,FacturasSustituidas,Tercero,Destinatarios,ImporteRectificacion,Desglose,Encadenamiento);
      RegAlta.DescripcionOperacion:='Venta minorista en factura simplificada';
-     RegAlta.FacturaSinIdentifDestinatarioArt61d:='N';
-     RegAlta.FacturaSimplificadaArt7273:='N';
-     RegAlta.EmitidaPorTerceroDestinatario:='N';
-     RegAlta.Macrodato:='N';
+     RegAlta.FacturaSinIdentifDestinatarioArt61d:=TL4.NO;
+     RegAlta.FacturaSimplificadaArt7273:=TL4.NO;
+     RegAlta.EmitidaPorTerceroDestinatario:=TL4.NO;
+     RegAlta.Macrodato:=TL4.NO;
+     RegAlta.SETSubsanacion(TL4.NO);
+     RegAlta.SETRechazoPrevio(TL17.Sin_RechazoPrevio_AEAT);
      //Creacion de la factura
      Memologs.Lines.Text := XMLFactura.GenearXML(1,Cabecera,RegAlta).XML.Text;
    except
@@ -134,5 +136,6 @@ procedure TFormPpal.FormShow(Sender: TObject);
 begin
    FormPpal.caption:='Test SDK '+TVersion.NumeroVersion+'     Tipo: '+Tversion.TipoVersion+'     Fecha : '+Tversion.FechaVersion;
 end;
+
 
 end.
