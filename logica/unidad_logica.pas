@@ -1,28 +1,26 @@
 unit unidad_logica;
 //DaMoRaDEV, SDK VeriFactu 0.1.0
-{
-unit LogicaIVA;
 
 interface
-type
-  TTipoIVA = (iva4, iva10, iva21);
-  ConjuntoIVA = set of TTipoIVA;
-function IVA: ConjuntoIVA;
-implementation
-function IVA: ConjuntoIVA;
-begin
-  Result := [iva4, iva10, iva21];
-end;
-end.
-
-}
-interface
-  Uses classes,system.SysUtils;
+  Uses classes,system.SysUtils,HASH;
 
   Function ValidarNIF(NIF: string): Boolean;
+  Function SHA256(texto:string):string;
 
 implementation
 
+{ sha 256 }
+ Function SHA256(texto:string):string;
+  var
+    SHA256: THashSHA2;
+  begin
+    try
+        SHA256 := THashSHA2.Create;
+    finally
+        Result := SHA256.GetHashString(texto);
+    end;
+  end;
+{  Validar NIF }
 function ValidarNIF(NIF: string): Boolean;
 const
   LetrasNIF: string = 'TRWAGMYFPDXBNJZSQVHLCKE';
