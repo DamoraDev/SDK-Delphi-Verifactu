@@ -20,7 +20,7 @@ implementation
 
 class function TVersion.NumeroVersion: string;
 begin
-  Result := '0.1.105';
+  Result := '0.1.120';
 end;
 class function TVersion.TipoVersion: string;
 begin

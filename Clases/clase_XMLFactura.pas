@@ -107,8 +107,8 @@ begin
     end;
     nodoRegistroAlta.AddChild('RefExterna').Text := RegistroAlta.RefExterna;
     nodoRegistroAlta.AddChild('NombreRazonEmisor').Text := RegistroAlta.NombreRazonEmisor;
-    nodoRegistroAlta.AddChild('Subsanacion').Text := RegistroAlta.Subsanacion;
-    nodoRegistroAlta.AddChild('RechazoPrevio').Text := RegistroAlta.RechazoPrevio;
+    nodoRegistroAlta.AddChild('Subsanacion').Text := RegistroAlta.GETSubsanacion;
+    nodoRegistroAlta.AddChild('RechazoPrevio').Text := RegistroAlta.GETRechazoPrevio;
     nodoRegistroAlta.AddChild('TipoFactura').Text := RegistroAlta.TipoFactura ;
     nodoRegistroAlta.AddChild('TipoRectificativa').Text := RegistroAlta.TipoRectificativa;
     // SUBNODO Facturas Rectificadas  verificado xml sin error

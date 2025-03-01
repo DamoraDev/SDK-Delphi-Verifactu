@@ -49,11 +49,15 @@ type TRegistroAlta = class(TInterfacedObject,IRegistroAlta)
     FDesglose:TDesglose;
     FEncadenamiento:TEncadenamiento;
   public
+    Procedure SETSubsanacion(Valor:char);
+    Procedure SETRechazoPrevio(Valor:char);
+    Function GETSubsanacion:char;
+    Function GETRechazoPrevio:char;
     property IDFactura: TIDFactura read FIDFactura write FIDFactura;
     property RefExterna: string read FRefExterna write FRefExterna;
     property NombreRazonEmisor: string read FNombreRazonEmisor write FNombreRazonEmisor;
-    property Subsanacion: char read FSubsanacion write FSubsanacion;
-    property RechazoPrevio: char read FRechazoPrevio write FRechazoPrevio;
+    property Subsanacion: char read GETSubsanacion write SETSubsanacion;
+    property RechazoPrevio: char read GETRechazoPrevio write SETRechazoPrevio;
     property TipoFactura: string read FTipoFactura write FTipoFactura;
     property TipoRectificativa: char read FTipoRectificativa write FTipoRectificativa;
     property FacturasRectificadas: TFacturasRectificadas read FFacturasRectificadas write FFacturasRectificadas;
@@ -86,7 +90,31 @@ var
   NombreNodo: string = ''; // nombre nodos para posicionar las subclases en el XML
 
 implementation
+Function TRegistroAlta.GETRechazoPrevio: Char;
+Begin
+  result := FRechazoPrevio;
+End;
+Function TRegistroAlta.GETSubsanacion: Char;
+begin
+  result := FSubsanacion;
+end;
+Procedure TRegistroAlta.SETRechazoPrevio(Valor: Char);
+Begin
+  if (valor<>'N')AND(valor<>'S')AND(valor<>'X') then
+     raise Exception.Create('Error: RechazoPrevio debe ser N, S o X');
+  if (valor='X')AND( GETSubsanacion='N') then
+      raise Exception.Create('Error: No se admiten Facturas con Subsanacion N y Rechazo Previo X')
+  else FRechazoPrevio := valor;
+End;
 
+Procedure TRegistroAlta.SETSubsanacion(Valor: Char);
+Begin
+  if (Valor<>'N')AND (Valor<>'S') then
+    raise Exception.Create('Error: Subsanacion debe de ser S o N');
+  if ( valor = 'N' )AND (GETRechazoPrevio='X')  then
+    raise Exception.Create('Error: No se admiten Facturas con Subsanacion N y Rechazo Previo X')
+  else FSubsanacion := valor;
+End;
 { Constructores y Destructores }
 
 
