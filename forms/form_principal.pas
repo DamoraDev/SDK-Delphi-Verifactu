@@ -33,6 +33,7 @@ type
     cboxEsPrimerRegistro: TCheckBox;
     procedure btnXMLFacturaClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure btnHuellaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -48,8 +49,27 @@ implementation
 uses
   clase_cabecera, clase_RegistroAlta,clase_XMLFactura,clase_ImporteRectificacion,
   clase_Tercero,clase_Destinatarios,clase_version,clase_desglose,clase_encadenamiento,
+  clase_DatosRegistroAlta,clase_Huella,unidad_logicaFechas,
   clase_IDFactura, clase_FacturasRectificadas,clase_FacturasSustituidas,unidad_listasv2;
 
+
+procedure TFormPpal.btnHuellaClick(Sender: TObject);
+var DatosRegistroAlta:TDatosRegistroAlta;
+begin
+  DatosRegistroAlta:= TDatosRegistroAlta.Create;
+  DatosRegistroAlta.IDEmisorFactura:='12345678Z';
+  DatosRegistroAlta.NumSerieFactura:='Serie1234';
+  DatosRegistroAlta.FechaExpedicionFactura:=FormatoFechaDate('12-12-2024') ;
+  DatosRegistroAlta.TipoFactura:='F2';
+  DatosRegistroAlta.CuotaTotal := 21;
+  DatosRegistroAlta.ImporteTotal:=100;
+  DatosRegistroAlta.PrimerRegistro:='S';
+  DatosRegistroAlta.Huella:='';// es primer registro
+  DatosRegistroAlta.FechaHoraHusoGenRegistro:=FormatoFechaDate('12-12-2024');
+  MemoLogs.Clear;
+  Memologs.Lines.Add(THuella.HuellaRegistroAlta(DatosRegistroAlta));
+  DatosRegistroAlta.Free;
+end;
 
 procedure TFormPpal.btnXMLFacturaClick(Sender: TObject);
 var
