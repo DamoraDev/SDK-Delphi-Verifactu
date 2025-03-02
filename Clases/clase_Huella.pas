@@ -2,7 +2,7 @@ unit clase_Huella;
  //DaMoRaDEV, SDK VeriFactu 0.1.0
 interface
 Uses SysUtils, Classes, Xml.XMLDoc, Xml.XMLIntf, shellapi, windows,unidad_logica,
-    clase_DatosRegistroAlta,clase_DatosRegistroAnulacion,clase_DatosEventos;
+    clase_DatosRegistroAlta,clase_DatosRegistroAnulacion,clase_DatosEventos,unidad_logicaFechas;
 
 
 
@@ -23,7 +23,7 @@ Type
     Property TipoHuella: String read FTipoHuella write FTipoHuella;
     Property HuellaAnterior: string read FHuellaAnterior write FHuellaAnterior;
     Procedure FirmarXML(const NombreArchivo: string);
-    Class Function HuellaRegistroAlta(ADatosRegistroAlta:TDatosRegistroAlta;APrimerRegistro:char):string;
+    Class Function HuellaRegistroAlta(ADatosRegistroAlta:TDatosRegistroAlta):string;
     Class Function HuellaRegistroAnulacion(ADatosRegistroAnulacion:TDatosRegistroAnulacion;APrimerRegistro:char):string;
    // Function HuellaEventos(ADatosEventosn:TDatosEventos;APrimerRegistro:char):string;
   End;
@@ -48,11 +48,9 @@ End;
 
 
              { Huella Registro Alta }
-class Function THuella.HuellaRegistroAlta(ADatosRegistroalta: TDatosRegistroAlta; APrimerRegistro: Char): string;
+class Function THuella.HuellaRegistroAlta(ADatosRegistroalta: TDatosRegistroAlta): string;
 var
   valorstring: string;
-  DateTimeStr: string;
-  TimeZoneStr: string;
 begin
   valorstring := '';
 
@@ -65,12 +63,10 @@ begin
     valorstring := valorstring + 'TipoFactura=' + ADatosRegistroalta.TipoFactura + '&';
     valorstring := valorstring + 'CuotaTotal=' + FloatToStr(ADatosRegistroalta.CuotaTotal) + '&';
     valorstring := valorstring + 'ImporteTotal=' + FloatToStr(ADatosRegistroalta.ImporteTotal) + '&';
-    if APrimerRegistro = 'N' then
+    if ADatosRegistroAlta.PrimerRegistro = 'N' then
           valorstring := valorstring + 'Huella=' + ADatosRegistroalta.Huella + '&';
     // Formatear FechaHoraHusoGenRegistro con zona horaria
-    DateTimeStr := FormatDateTime('dd-mm-yyyy hh:nn:ss', ADatosRegistroalta.FechaHoraHusoGenRegistro);
-    TimeZoneStr := FormatDateTime('T', ADatosRegistroalta.FechaHoraHusoGenRegistro, TFormatSettings.Create('es-ES'));
-    valorstring := valorstring + 'FechaHoraHusoGenRegistro=' + DateTimeStr + ' ' + TimeZoneStr;
+    valorstring := valorstring + 'FechaHoraHusoGenRegistro=' + ObtenerFechaConHusoHorario(now);
     ADatosRegistroalta.Free;
     Result := sha256(valorstring);
 end;

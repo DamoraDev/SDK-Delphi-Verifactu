@@ -2,7 +2,7 @@ unit clase_DatosRegistroAlta;
 
 interface
 
-Uses SysUtils, Classes, Xml.XMLDoc, Xml.XMLIntf, shellapi, windows,unidad_logica;
+Uses SysUtils, Classes, shellapi, windows,unidad_logica;
 type IDatosRegistroAlta= Interface
   ['{BBAB3174-8EB9-469D-BB5A-90536389B7AA}']
 End;
@@ -47,13 +47,23 @@ Begin
   Inherited Destroy;
 End;
 Constructor TDatosRegistroAlta.Create;
-  begin
-    IDEmisorFactura:='';
-    NumSerieFactura :='';
-    FechaExpedicionFactura := StrToDate( FormatDateTime('dd-mm-yyyy',now));
-    TipoFactura:='L2';
-    CuotaTotal:=0.00;
-    ImporteTotal:=0.00;
-    Huella:='';
-  end;
+var
+  FormatSettings: TFormatSettings;
+begin
+  IDEmisorFactura := '';
+  NumSerieFactura := '';
+  // Configurar FormatSettings para un formato específico de fecha
+  FormatSettings := TFormatSettings.Create;
+  FormatSettings.DateSeparator := '-';
+  FormatSettings.ShortDateFormat := 'dd-mm-yyyy';
+
+  // Usar FormatSettings para evitar problemas de formato
+  FechaExpedicionFactura := StrToDate(FormatDateTime('dd-mm-yyyy', Now, FormatSettings), FormatSettings);
+
+  TipoFactura := 'L2';
+  CuotaTotal := 0.00;
+  ImporteTotal := 0.00;
+  Huella := '';
+end;
+
 end.
