@@ -4,6 +4,7 @@ interface
 
 uses
   System.SysUtils,
+  dateutils,
   System.Variants,
   System.Classes,
   Vcl.Graphics,
@@ -143,6 +144,9 @@ begin
      RegAlta.Macrodato:=TL4.NO;
      RegAlta.SETSubsanacion(TL4.NO);
      RegAlta.SETRechazoPrevio(TL17.Sin_RechazoPrevio_AEAT);
+     RegAlta.FechaOperacion:=now;
+     RegAlta.CuotaTotal:=21;
+     RegAlta.ImporteTotal:=100;
      //Creacion de la factura
      Memologs.Lines.Text := XMLFactura.GenearXML(1,Cabecera,RegAlta).XML.Text;
    except
