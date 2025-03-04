@@ -17,7 +17,7 @@
 					<li>TVersion</li>
 					<li>TIDFactura</li>
 					<li>TCabecera</li>
-					<li>Unidad Logica[D]</li>
+					<li>Unidad_Logica[D]</li>
 					<li>TRegistroEventos[D]</li>
 				</td>
 				<td>
@@ -32,23 +32,23 @@
 					<li>TEncadenamiento[R]</li>
 					<li>TRegistroAlta[DR]</li>
 					<li>TXMLFactura[R]</li>
-					
+					<li>unidad_logicaFechas[R]</li>
 				</td>
 				<td>
 					<li>THuella[DR]</li>
 					<li>TDesglose[DR]</li>
 					<li>TRegistroAnulacion[D]</li>
 					<li>Unidad_ListasV2[DR]</li>
+					<li>unidad_firma[P]</li>
 				</td>
 				<td>
-					<li>unidad_firma[P]</li>
+					<li>TEventos[P]</li>
+					<li>TSoap[P]</li>
 					<li>Taditoria[DR]</li>
 					<li>TDatosRegistroAlta</li>
 					<li>TDatosRegistroAnulacion</li>
 				</td>
 				<td>
-					<li>TEventos[P]</li>
-					<li>TSoap[P]</li>
 					<li><b id="archivo">[D]</b>En Desarrollo</li>
 					<li><b id="archivo">[R]</b>En Revisión</li>
 					<li><b id="archivo">[P]</b>Pendiente</li>
@@ -587,7 +587,7 @@
 											<!-- Clase TFacturasSustiuidas-->
 <div class="TFacturasSustiuidas">
 	<table Class="TFacturasSustiuidas">
-	<h2>Calse TFacturasSustiuidas</h2>
+	<h2>Clase TFacturasSustiuidas</h2>
 	<b id="archivo">clase_FacturasSustituidas.pas</b>
 		<Thead>
 		</thead>
@@ -920,18 +920,6 @@
 			</tr>
 			<tr>
 				<td>TRegistroAlta</td>
-				<td>IDFactura</td>
-				<td>Property Getter y Setter de la Subclase TIDFactura</td>
-				<td>Contiene los datos necesarios para generar la parte del XML IDFactura</td>
-			</tr>
-			<tr>
-				<td>TRegistroAlta</td>
-				<td>RefExterna</td>
-				<td>Property Getter y Setter de la Referencia Externa de la factura</td>
-				<td>Alfanumérico [60]</td>
-			</tr>
-			<tr>
-				<td>TRegistroAlta</td>
 				<td>NombreRazonEmisor</td>
 				<td>Property Getter y Setter del Nombde o Razon del Emisor de la factura</td>
 				<td>Alfanumérico [120]</td>
@@ -967,10 +955,16 @@
 				<td>Alfanumérico[2] lista L2</td>
 			</tr>	
 			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td>TRegistroAlta</td>
+				<td>RefExterna</td>
+				<td>Property Getter y Setter de la referencia Externa de la factura.</td>
+				<td>Alfanumérico[60]</td>
+			</tr>
+			<tr>
+				<td>TRegistroAlta</td>
+				<td>IDFactura</td>
+				<td>Getter y Setter de la clase TIDFactura</td>
+				<td>Ver API de la clase IDFactura.</td>
 			</tr>
 			<tr>
 				<td></td>
@@ -983,7 +977,25 @@
 				<td></td>
 				<td></td>
 				<td></td>
-			</tr>			
+			</tr>	
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>	
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>	
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>				
 		</tbody>
 	</table>
 </div>
