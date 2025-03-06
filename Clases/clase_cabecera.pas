@@ -55,8 +55,8 @@ End;
 
 Procedure  Tcabecera.SETFechaFinVerifactu(Fecha: TDate);
 Begin
-    if RequeridoPorEAT= false then  raise Exception.Create('Error: No hay requerimiento EAT, su valor es FALSE');
-    if Hayincidencia = false then  raise Exception.Create('Error: No hay indicencia , su valor es FALSE');
+    if RequeridoPorEAT= false then  raise Exception.Create('Error en Clase Cabecera: No hay requerimiento EAT, su valor es FALSE');
+    if Hayincidencia = false then  raise Exception.Create('Error en Clase Cabecera: No hay indicencia , su valor es FALSE');
     FormatDateTime('dd-mm-yyyy',fecha);
     FRemisionVoluntaria_FechaFinVerifactu:=Fecha;
 End;
@@ -65,16 +65,16 @@ End;
 
 Procedure TCabecera.SETRepresentanteNIF(NIF: string);
 Begin
- if UsaRepresentante=false then raise Exception.Create('Error: Usa Representante es False. Debe ser True');
+ if UsaRepresentante=false then raise Exception.Create('Error en Clase Cabecera: Usa Representante es False. Debe ser True');
  if not ValidarNIF(NIF) then
-    raise Exception.Create('Error: NIF no válido');
+    raise Exception.Create('Error en Clase Cabecera: NIF no válido');
  FRepresentante_NIF:=NIF;
 End;
 
 Procedure TCabecera.SETRepresentanteNombre(NombreRazon: string);
 Begin
-  if UsaRepresentante=false then raise Exception.Create('Error: Usa Representante es False. Debe ser True');
-  if NombreRazon.Length>120  then raise Exception.Create('Error: NombreRazon debe ser inferior a 120 caracteres');
+  if UsaRepresentante=false then raise Exception.Create('Error en Clase Cabecera: Usa Representante es False. Debe ser True');
+  if NombreRazon.Length>120  then raise Exception.Create('Error en Clase Cabecera: NombreRazon debe ser inferior a 120 caracteres');
   FRepresentante_NombreRazon := NombreRazon;
 End;
 

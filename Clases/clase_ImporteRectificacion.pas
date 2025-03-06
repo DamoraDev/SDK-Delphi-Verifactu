@@ -39,14 +39,14 @@ implementation
 
   Constructor TimporteRectificacion.Create(ANodoNecesario: Boolean);
   Begin
-     if ANodoNecesario = true then raise Exception.Create('Error : Es es necesario indicar BaseRectificada,CuotaRectificada ni CuotaRecargoRectificado');
+     if ANodoNecesario = true then raise Exception.Create('Error en clase ImporteRectificacion : Es es necesario indicar BaseRectificada,CuotaRectificada ni CuotaRecargoRectificado');
      NodoNecesario := ANodoNecesario;
   End;
   Constructor TImporteRectificacion.Create(AnodoNecesario: Boolean; ABaseRectificada: Currency; ACuotaRectificada: Currency; CuotaRecargoRectificado: Currency);
   Begin
 
     if ANodoNecesario = false then
-      raise Exception.Create('Error: Si el Nodo no es necesario no es necesario indicar BaseRectificada,CuotaRectificada ni CuotaRecargoRectificado');
+      raise Exception.Create('Error en clase ImporteRectificacion : Si el Nodo no es necesario no es necesario indicar BaseRectificada,CuotaRectificada ni CuotaRecargoRectificado');
     BaseRectificada := ABaseRectificada;
     CuotaRectificada := ACuotaRectificada;
     CuotaRecargoRectificado := CuotaRecargoRectificado;

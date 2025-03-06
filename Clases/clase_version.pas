@@ -20,7 +20,7 @@ implementation
 
 class function TVersion.NumeroVersion: string;
 begin
-  Result := '0.1.120';
+  Result := '0.1.130';
 end;
 class function TVersion.TipoVersion: string;
 begin
@@ -28,7 +28,7 @@ begin
 end;
 class function TVersion.FechaVersion: string;
 begin
-  Result := '19-02-2025'; // Fecha de la versión
+  Result := '06-03-2025'; // Fecha de la versión
 end;
 
 end.

@@ -55,7 +55,7 @@ Begin
 End;
 Constructor TFacturasSustiuidas.Create(ANodoNecesario: Boolean);
 Begin
-  if ANodoNecesario = True then  raise Exception.Create('Error: Nodo Necesario, se ha de indicar NIF,NumSerie y Fecha');
+  if ANodoNecesario = True then  raise Exception.Create('Error en clase FacturasSustituidas : Nodo Necesario, se ha de indicar NIF,NumSerie y Fecha');
   NodoNecesario:=ANodoNecesario;
   IDEmisorFactura :='12345678Z';
   NumSerieFactura:='0';
@@ -64,19 +64,19 @@ Begin
 End;
 Constructor TFacturasSustiuidas.Create(ACantidadFacturas:integer;ANodoNecesario:boolean;NIF: string; Numserie: string; Fecha: TDate);
 Begin
-   if (ACantidadFacturas<=0)OR(ACantidadFacturas>1000) then raise Exception.Create('Error: Cantidad Facturas debe ser un valor entre 1 y 1000');
+   if (ACantidadFacturas<=0)OR(ACantidadFacturas>1000) then raise Exception.Create('Error en clase FacturasSustituidas : Cantidad Facturas debe ser un valor entre 1 y 1000');
    if ANodoNecesario = true then
        Begin
          if not ValidarNIF(NIF) then
-           raise Exception.Create('Error : NIF no válido');
-         if Numserie.Length>60 then raise Exception.Create('Error: Numero de serie contiene mas de 60 caracteres.');
+           raise Exception.Create('Error en clase FacturasSustituidas  : NIF no válido');
+         if Numserie.Length>60 then raise Exception.Create('Error en clase FacturasSustituidas : Numero de serie contiene mas de 60 caracteres.');
          FormatDateTime('dd-mm-yyyy',Fecha);
          IDEmisorFactura := NIF;
          NumSerieFactura := Numserie;
          FechaExpedicionFactura :=Fecha;
          NodoNecesario:=ANodoNecesario;
        End else
-   raise Exception.Create('Error: Si el Nodo no es necesario no es necesario indicar NIF, NumSerie ni Fecha');
+   raise Exception.Create('Error en clase FacturasSustituidas : Si el Nodo no es necesario no es necesario indicar NIF, NumSerie ni Fecha');
    CantidadFacturas:=1;
 End;
 end.

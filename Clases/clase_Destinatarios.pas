@@ -40,17 +40,17 @@ Begin
 End;
 Constructor TDestinatarios.Create(ANodoNecesario: Boolean);
 Begin
-  if ANodoNecesario = true  then raise Exception.Create('Error: Es necesario indicar NombreRazon y NIF si el nodo  es necesario.');
+  if ANodoNecesario = true  then raise Exception.Create('Error en Clase Destinatarios : Es necesario indicar NombreRazon y NIF si el nodo  es necesario.');
   NodoNecesario:=ANodoNecesario;
 End;
 
 Constructor TDestinatarios.Create(ANodoNecesario:boolean;ANombreRazon: string; ANIF: string;Cantidad:integer);
 begin
-  if ANodoNecesario = False  then raise Exception.Create('Error: No es necesario indicar NombreRazon ni NIF si el nodo no es necesario.');
+  if ANodoNecesario = False  then raise Exception.Create('Error en Clase Destinatarios : No es necesario indicar NombreRazon ni NIF si el nodo no es necesario.');
   if not ValidarNIF(ANIF) then
-      raise Exception.Create('NIF no válido');
+      raise Exception.Create('Error en Clase Destinatarios : NIF no válido');
   if ANombreRazon.Length>120 then
-      raise Exception.Create('Error: NombreRazon No puede superar los 120 Caracteres');
+      raise Exception.Create('Error en Clase Destinatarios : NombreRazon No puede superar los 120 Caracteres');
   IDOtro_CodigoPais:='ES';
   IDOtro_IDType:='';
   IDOtro_ID:='';

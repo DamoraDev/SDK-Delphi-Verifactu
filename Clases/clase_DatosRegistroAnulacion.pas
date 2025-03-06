@@ -29,6 +29,7 @@ End;
 
 implementation
 
+
      { *** Constructores y destructores ***}
 
 Procedure  TDatosRegistroAnulacion.Free;

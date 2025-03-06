@@ -28,9 +28,9 @@ begin
   IDEmisorFactura := NIF;
   NumSerieFactura := NSerie;
   if NumSerieFactura.Length > 60 then
-    raise Exception.Create('Numero Serie Factura debe ser menor de 60 caracteres');
+    raise Exception.Create('Error en Clase IDFactura : Número Serie Factura debe ser menor de 60 caracteres');
   if not ValidarNIF(IDEmisorFactura) then
-    raise Exception.Create('NIF no válido');
+    raise Exception.Create('Error en Clase IDFactura : NIF no válido');
   FFechaExpedicionFactura := Now;
 end;
 destructor TIDFactura.Destroy;

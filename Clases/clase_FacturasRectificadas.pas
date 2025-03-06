@@ -40,7 +40,7 @@ implementation
 { TFacturasRectificadas }
 constructor TFacturasRectificadas.Create(ANodoNecesario:boolean);
 Begin
-   if ANodoNecesario = true then raise Exception.Create('Error: Debe indicar NIF,NumSerie y  Fecha si el nodo es necesario');
+   if ANodoNecesario = true then raise Exception.Create('Error en Clase FacturasRectificadas : Debe indicar NIF,NumSerie y  Fecha si el nodo es necesario');
    FNodoNecesario := ANodoNecesario;
    FIDEmisorFactura:='123456789Z';
    FNumSerieFactura:='0';
@@ -52,15 +52,15 @@ begin
   if ANodoNecesario = true then
       Begin
         if not ValidarNIF(NIF) then
-          raise Exception.Create('Error: NIF no válido');
+          raise Exception.Create('Error en Clase FacturasRectificadas : NIF no válido');
         if NumSerie.Length > 60 then
-          raise Exception.Create('Error: Número de serie contiene más de 60 caracteres.');
+          raise Exception.Create('Error en Clase FacturasRectificadas : Número de serie contiene más de 60 caracteres.');
         IDEmisorFactura := NIF;
         NumSerieFactura := NumSerie;
         FechaExpedicionFactura := Fecha;
         NodoNecesario:=ANodoNecesario;
       End else
-  raise Exception.Create('Error: Si el nodo no es necesario no debe indicar NIF, NumSerie ni Fecha');
+  raise Exception.Create('Error en Clase FacturasRectificadas : Si el nodo no es necesario no debe indicar NIF, NumSerie ni Fecha');
 end;
 
 destructor TFacturasRectificadas.Destroy;

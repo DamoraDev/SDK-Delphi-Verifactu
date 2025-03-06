@@ -106,10 +106,10 @@ End;
   constructor TDesglose.Create(AcantidadDesglose: Integer;Aimpuesto:FormatoImpuestos);
     begin
       if ACantidadDesglose>12 then
-            raise Exception.Create('Error: Cantidad Desglose no puede ser mayor de 12');
+            raise Exception.Create('Error en Clase Desglose : Cantidad Desglose no puede ser mayor de 12');
       FCantidadDesglose := AcantidadDesglose; // 1-12
       if Aimpuesto in [i01,i02,i03,i05] then  FImpuesto:=[Aimpuesto]
-         else raise  Exception.Create('Error: Impuestos debe de ser ; i01: IVA,i02: Ceuta y Melilla,i03: igic Canarias,i05: Otros');
+         else raise  Exception.Create('Error en Clase Desglose : Impuestos debe de ser ; i01: IVA,i02: Ceuta y Melilla,i03: igic Canarias,i05: Otros');
       if Fimpuesto=[i01] then FValorImpuesto := '01';  //iva
       if Fimpuesto=[i02] then FValorImpuesto := '02';  // ceuta y melilla
       if Fimpuesto=[i03] then FValorImpuesto := '03';  //igic canarias
@@ -121,27 +121,27 @@ End;
       // Validación y asignación de valores con formato requerido
       FTipoImpositivo := 123.45; // Valor ejemplo
       if Length(FormatFloat('000.00', FTipoImpositivo)) > 6 then
-        raise Exception.Create('TipoImpositivo no cumple con el formato 3,2');
+        raise Exception.Create('Error Clase Desglose : TipoImpositivo no cumple con el formato 3,2');
 
       FBaseImponibleOImporteNoSujeto := 1234567890.12; // Valor ejemplo
       if Length(FormatFloat('000000000000.00', FBaseImponibleOImporteNoSujeto)) > 15 then
-        raise Exception.Create('BaseImponibleOImporteNoSujeto no cumple con el formato 12,2');
+        raise Exception.Create('Error Clase Desglose : BaseImponibleOImporteNoSujeto no cumple con el formato 12,2');
 
       FBaseImponibleACoste := 1234567890.12; // Valor ejemplo
       if Length(FormatFloat('000000000000.00', FBaseImponibleACoste)) > 15 then
-        raise Exception.Create('BaseImponibleACoste no cumple con el formato 12,2');
+        raise Exception.Create('Error Clase Desglose : BaseImponibleACoste no cumple con el formato 12,2');
 
       FCuotaRepercutida := 1234567890.12; // Valor ejemplo
       if Length(FormatFloat('000000000000.00', FCuotaRepercutida)) > 15 then
-        raise Exception.Create('CuotaRepercutida no cumple con el formato 12,2');
+        raise Exception.Create('Error Clase Desglose : CuotaRepercutida no cumple con el formato 12,2');
 
       FTipoRecargoEquivalencia := 123.45; // Valor ejemplo
       if Length(FormatFloat('000.00', FTipoRecargoEquivalencia)) > 6 then
-        raise Exception.Create('TipoRecargoEquivalencia no cumple con el formato 3,2');
+        raise Exception.Create('Error Clase Desglose : TipoRecargoEquivalencia no cumple con el formato 3,2');
 
       FCuotaRecargoEquivalencia := 1234567890.12; // Valor ejemplo
       if Length(FormatFloat('000000000000.00', FCuotaRecargoEquivalencia)) > 15 then
-        raise Exception.Create('CuotaRecargoEquivalencia no cumple con el formato 12,2');
+        raise Exception.Create('Error Clase Desglose : CuotaRecargoEquivalencia no cumple con el formato 12,2');
     end;
 
 end.

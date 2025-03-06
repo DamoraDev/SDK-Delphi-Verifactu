@@ -17,7 +17,7 @@ Type
     FCuotaTotal: Currency;
     FImporteTotal: Currency;
     FHuella: string;
-    FFechaHoraHusoGenRegistro: TDateTime;
+    FFechaHoraHusoGenRegistro: string;
     FPrimerRegistro:char;
   Public
     Property IDEmisorFactura: string read FIDEmisorFactura write FIDEmisorFactura;
@@ -27,7 +27,7 @@ Type
     Property CuotaTotal: Currency read FCuotaTotal write FCuotaTotal;
     Property ImporteTotal: Currency read FImporteTotal write FImporteTotal;
     Property Huella: string read FHuella write FHuella; //huella anterior si existe
-    Property FechaHoraHusoGenRegistro:TDateTime read FFechaHoraHusoGenRegistro write FFechaHoraHusoGenRegistro;
+    Property FechaHoraHusoGenRegistro:string read FFechaHoraHusoGenRegistro write FFechaHoraHusoGenRegistro;
     Property PrimerRegistro:char read  FPrimerRegistro write FPrimerRegistro;
     Constructor Create;
     Destructor Destroy;Override;
@@ -56,10 +56,8 @@ begin
   FormatSettings := TFormatSettings.Create;
   FormatSettings.DateSeparator := '-';
   FormatSettings.ShortDateFormat := 'dd-mm-yyyy';
-
   // Usar FormatSettings para evitar problemas de formato
   FechaExpedicionFactura := StrToDate(FormatDateTime('dd-mm-yyyy', Now, FormatSettings), FormatSettings);
-
   TipoFactura := 'L2';
   CuotaTotal := 0.00;
   ImporteTotal := 0.00;

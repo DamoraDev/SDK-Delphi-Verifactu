@@ -42,17 +42,17 @@ Begin
 End;
 Constructor TTercero.Create(ANodoNecesario: Boolean);
 Begin
-  if ANodoNecesario = true  then  raise Exception.Create('Error : Es necesario indicar Nombrerazon y NIF si el nodo es necesario');
+  if ANodoNecesario = true  then  raise Exception.Create('Error clase Tercero : Es necesario indicar Nombrerazon y NIF si el nodo es necesario');
   NodoNecesario := AnodoNecesario;
 End;
 
 Constructor TTercero.Create(ANodoNecesario:boolean;NombreRazon:string;NIF:string);
 Begin
-  if ANodoNecesario = False  then  raise Exception.Create('Error : NO Es necesario indicar Nombrerazon y NIF si el nodo NO es necesario');
+  if ANodoNecesario = False  then  raise Exception.Create('Error  clase Tercero : NO Es necesario indicar Nombrerazon y NIF si el nodo NO es necesario');
   if Length(NombreRazon) > 120 then
-    raise Exception.Create('Error: NomberRazon  no debe superar los 120 caracteres.');
+    raise Exception.Create('Error clase Tercero : NomberRazon  no debe superar los 120 caracteres.');
   if not ValidarNIF(NIF) then
-    raise Exception.Create('NIF no válido');
+    raise Exception.Create('Error clase Tercero: NIF no válido');
   NodoNecesario := False;
   IDOtro_CodigoPais:='ES';
   IDOtro_IDType:='';
