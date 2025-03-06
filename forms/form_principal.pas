@@ -21,20 +21,26 @@ type
   TFormPpal = class(TForm)
     MemoLogs: TMemo;
     panelBotones: TPanel;
-    cboxHayFacturasRectificadas: TCheckBox;
-    cboxHayFacturasSustituidas: TCheckBox;
-    btnXMLFactura: TButton;
     btnXMLEventos: TButton;
     codigoQR: TImage;
     btnGenerarQR: TButton;
     btnFirmar: TButton;
     btnHuella: TButton;
+    gboxRegistroAlta: TGroupBox;
     cboxHayDestinatarios: TCheckBox;
-    cboxHayRequerimientoEAT: TCheckBox;
     cboxEsPrimerRegistro: TCheckBox;
-    procedure btnXMLFacturaClick(Sender: TObject);
+    cboxHayRequerimientoEAT: TCheckBox;
+    cboxHayFacturasSustituidas: TCheckBox;
+    cboxHayFacturasRectificadas: TCheckBox;
+    btnXMLFacturaAlta: TButton;
+    cboxRegistroAnulacion: TGroupBox;
+    btnGenerarXMLAnulacion: TButton;
+    cboxHayRechazoPrevio: TCheckBox;
+    cboxSinRegistroPrevio: TCheckBox;
+    procedure btnXMLFacturaAltaClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnHuellaClick(Sender: TObject);
+    procedure btnGenerarXMLAnulacionClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -50,9 +56,32 @@ implementation
 uses
   clase_cabecera, clase_RegistroAlta,clase_XMLFactura,clase_ImporteRectificacion,
   clase_Tercero,clase_Destinatarios,clase_version,clase_desglose,clase_encadenamiento,
-  clase_DatosRegistroAlta,clase_Huella,unidad_logicaFechas,
+  clase_DatosRegistroAlta,clase_Huella,unidad_logicaFechas,clase_RegistroAnulacion,
+  clase_GeneradoPor,
   clase_IDFactura, clase_FacturasRectificadas,clase_FacturasSustituidas,unidad_listasv2;
 
+
+procedure TFormPpal.btnGenerarXMLAnulacionClick(Sender: TObject);
+var
+  cabecera: TCabecera;
+  RegAlta: TRegistroAlta;
+  IDFactura: TIDFactura;
+  XMLFactura:TXMLFactura;
+  Encadenamiento:Tencadenamiento;
+  RegAnulacion:TRegistroAnulacion;
+  GeneradoPor:TGeneradoPor;
+begin
+ // factura Anulacion
+    cabecera := TCabecera.Create('Empresa Test', '12345678Z');
+    IDFactura := TIDFactura.Create('12345678Z','fact001Anulada');
+    GeneradoPor := TGeneradoPor.Create('Empresa Test','12345678Z');
+    Encadenamiento := Tencadenamiento.Create(TL4.SI);
+    RegAlta := TRegistroAlta.create(False);
+    RegAnulacion:= TRegistroAnulacion.Create(IDFactura,GeneradoPor,Encadenamiento,true) ;
+    Memologs.Lines.Text := XMLFactura.GenearXML(1,cabecera,RegAlta,RegAnulacion).XML.Text ;
+    RegAlta.Free;
+    RegAnulacion.Free;
+end;
 
 procedure TFormPpal.btnHuellaClick(Sender: TObject);
 var DatosRegistroAlta:TDatosRegistroAlta;
@@ -66,13 +95,13 @@ begin
   DatosRegistroAlta.ImporteTotal:=100;
   DatosRegistroAlta.PrimerRegistro:='S';
   DatosRegistroAlta.Huella:='';// es primer registro
-  DatosRegistroAlta.FechaHoraHusoGenRegistro:=FormatoFechaDate('12-12-2024');
+  DatosRegistroAlta.FechaHoraHusoGenRegistro:=ObtenerFechaConHusoHorario(now);
   MemoLogs.Clear;
   Memologs.Lines.Add(THuella.HuellaRegistroAlta(DatosRegistroAlta));
   DatosRegistroAlta.Free;
 end;
 
-procedure TFormPpal.btnXMLFacturaClick(Sender: TObject);
+procedure TFormPpal.btnXMLFacturaAltaClick(Sender: TObject);
 var
   cabecera: TCabecera;
   RegAlta: TRegistroAlta;
@@ -85,9 +114,11 @@ var
   Destinatarios:TDestinatarios;
   Desglose:TDesglose;
   Encadenamiento:Tencadenamiento;
+  RegAnulacion:TRegistroAnulacion;
 begin
   XMLFactura := nil;
    try
+     RegAnulacion := TRegistroAnulacion.Create(False);
      FormatDateTime('dd-mm-yyyy',now);
      cabecera := TCabecera.Create('Empresa Test', '12345678Z');
      IDFactura := TIDFactura.Create('12345678Z','fact001test');
@@ -136,7 +167,7 @@ begin
             Cabecera.RemisionRequerimiento_FinRequerimiento:=TL4.SI; //s o N
           End;
      //ShowMessage(' tercero') ;
-     RegAlta := TRegistroAlta.Create('Empresa Test',IDFactura,'refext001',fF2,FacturasRectificadas,FacturasSustituidas,Tercero,Destinatarios,ImporteRectificacion,Desglose,Encadenamiento);
+     RegAlta := TRegistroAlta.Create('Empresa Test',IDFactura,'refext001',fF2,FacturasRectificadas,FacturasSustituidas,Tercero,Destinatarios,ImporteRectificacion,Desglose,Encadenamiento,true);
      RegAlta.DescripcionOperacion:='Venta minorista en factura simplificada';
      RegAlta.FacturaSinIdentifDestinatarioArt61d:=TL4.NO;
      RegAlta.FacturaSimplificadaArt7273:=TL4.NO;
@@ -147,12 +178,14 @@ begin
      RegAlta.FechaOperacion:=now;
      RegAlta.CuotaTotal:=21;
      RegAlta.ImporteTotal:=100;
+     RegAlta.NodoNecesario:=true;
      //Creacion de la factura
-     Memologs.Lines.Text := XMLFactura.GenearXML(1,Cabecera,RegAlta).XML.Text;
+     Memologs.Lines.Text := XMLFactura.GenearXML(1,Cabecera,RegAlta,RegAnulacion).XML.Text;
    except
         on E:Exception do raise Exception.Create('Error XML Factura : '+E.ToString);
    end;
     RegAlta.Free; // libera todas las clases en su destructor
+    RegAnulacion.Free;
 end;
 
 

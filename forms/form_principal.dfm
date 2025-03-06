@@ -2,7 +2,7 @@ object FormPpal: TFormPpal
   Left = 0
   Top = 0
   Caption = 'Test XML Verifactu'
-  ClientHeight = 543
+  ClientHeight = 661
   ClientWidth = 900
   Color = clBtnFace
   CustomTitleBar.CaptionAlignment = taCenter
@@ -12,14 +12,90 @@ object FormPpal: TFormPpal
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poDesktopCenter
+  WindowState = wsMaximized
   OnShow = FormShow
   TextHeight = 15
   object MemoLogs: TMemo
     Left = 209
     Top = 0
     Width = 691
-    Height = 543
+    Height = 661
     Align = alClient
+    Lines.Strings = (
+      'Cambios Realizados:'
+      'Implementado:'
+      
+        '- Corregidos todos los mensajes de Exceptions, ahora indican la ' +
+        'clase y '
+      
+        'el metodo afectado para poder depurar los errores de forma mas e' +
+        'ficiente.'
+      ' '
+      'Clases Afectadas : Todas.'
+      ''
+      '-Contemplato RegistroAnulacion En el Formulario de Testeo'
+      ''
+      'Archivo afectado: Formulario Principal  '
+      ''
+      '- Se Genera la Huella de RegistroAlta'
+      ''
+      '  Clases afectadas:'
+      '     -clase_huella.pas'
+      
+        '     -clase_DatosRegistroAlta.pas (FechaHusoHorarioRegistro como' +
+        ' string)'
+      '     -Form_Principal.pas'
+      ''
+      '- Se elimina la clase_RegistroFactura.pas'
+      '- Logica Factura ( clase_LogicaFactura.pas)'
+      ''
+      '    Usando el Documento dela AEAT'
+      '    FAQs_ver_1_1_facturas.pdf'
+      
+        '   Recordar que es un SDK la logica de la factura se ha de tener' +
+        ' en cuenta en'
+      
+        '   en el desarrollo de la aplicacion que use el SDK, asi como lo' +
+        's calculos matematicos'
+      '   de la factura: Base Imponible, Cuota, Importe'
+      ''
+      '   Clase Afectada : LogicaFacturav2'
+      '         - Se contemplan los siguientes casos:'
+      
+        '                      -No se puede emitir Factura sin RegistroAl' +
+        'ta ni RegistroAnulacion.'
+      
+        '                      -No se puede emitir Factura con RegistroAl' +
+        'ta y RegistroAnulacion'
+      '                       de formasimultanea.'
+      ''
+      '- Se A'#241'ade XML RegistroAnulacion'
+      
+        '         -Cases afectadas: RegistroAnulacion,XML Factura,Generad' +
+        'aPor,'
+      '          formulario principal.'
+      '          [ Actualmente en desarrollo ]'
+      ''
+      '                 --  Pasos Proyectados --'
+      ''
+      
+        '1.- Terminar las clases RegistroAlta y RegistroAnulacion con Hue' +
+        'lla y Firma'
+      '2.- Comprobar integridad de firma y huella.'
+      
+        '3.- Testear la logica de las facturas de la unidad LogicaFactura' +
+        'v2'
+      
+        '4.- Crear la carga del XML para revisar los eventos recibidos de' +
+        ' la AEAT'
+      
+        '5.- Testear envios reales mediante un cliente SOAP de facturas g' +
+        'eneradas'
+      
+        '      con el SDK. Esto permitir'#225' solucionar fallos y corregir la' +
+        ' logica de las facturas'
+      '      para poder garantizar su uso en un entorno real. '
+      '      En este punto pasariamos a fase Beta.')
     ScrollBars = ssVertical
     TabOrder = 0
   end
@@ -27,13 +103,15 @@ object FormPpal: TFormPpal
     Left = 0
     Top = 0
     Width = 209
-    Height = 543
+    Height = 661
     Align = alLeft
+    Color = clWhite
+    ParentBackground = False
     TabOrder = 1
     object codigoQR: TImage
       AlignWithMargins = True
       Left = 36
-      Top = 337
+      Top = 455
       Width = 137
       Height = 112
       Margins.Left = 35
@@ -200,99 +278,214 @@ object FormPpal: TFormPpal
       ExplicitTop = 328
       ExplicitWidth = 119
     end
-    object cboxHayFacturasRectificadas: TCheckBox
-      AlignWithMargins = True
-      Left = 4
-      Top = 4
-      Width = 201
-      Height = 17
-      Align = alTop
-      Caption = 'Hay Facturas Rectificadas'
-      TabOrder = 0
-    end
-    object cboxHayFacturasSustituidas: TCheckBox
-      AlignWithMargins = True
-      Left = 4
-      Top = 27
-      Width = 201
-      Height = 17
-      Align = alTop
-      Caption = 'Hay Facturas Sustituidas'
-      TabOrder = 1
-    end
-    object btnXMLFactura: TButton
-      AlignWithMargins = True
-      Left = 4
-      Top = 96
-      Width = 201
-      Height = 35
-      Align = alTop
-      Caption = 'Generar XML Factura'
-      TabOrder = 2
-      WordWrap = True
-      OnClick = btnXMLFacturaClick
-    end
     object btnXMLEventos: TButton
       AlignWithMargins = True
       Left = 4
-      Top = 137
+      Top = 311
       Width = 201
       Height = 35
       Align = alTop
-      Caption = 'Generar XML Eventos'
-      TabOrder = 3
+      Caption = 'Cargar XML Eventos'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
       WordWrap = True
     end
     object btnGenerarQR: TButton
       AlignWithMargins = True
       Left = 4
-      Top = 288
+      Top = 406
       Width = 201
       Height = 36
       Align = alBottom
       Caption = 'Generar QR'
-      TabOrder = 4
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
       WordWrap = True
     end
     object btnFirmar: TButton
       AlignWithMargins = True
       Left = 4
-      Top = 504
+      Top = 622
       Width = 201
       Height = 35
       Align = alBottom
       Caption = 'Firmar XML'
-      TabOrder = 5
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
     end
     object btnHuella: TButton
       AlignWithMargins = True
       Left = 4
-      Top = 462
+      Top = 580
       Width = 201
       Height = 36
       Align = alBottom
-      Caption = 'Huella SHA256'
-      TabOrder = 6
+      Caption = 'Huella SHA256 RegistroAlta'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+      OnClick = btnHuellaClick
     end
-    object cboxHayDestinatarios: TCheckBox
+    object gboxRegistroAlta: TGroupBox
       AlignWithMargins = True
       Left = 4
-      Top = 73
+      Top = 4
       Width = 201
-      Height = 17
+      Height = 182
       Align = alTop
-      Caption = 'Hay Destinatarios'
-      TabOrder = 7
+      Caption = 'RegistroAlta'
+      Color = 13948116
+      ParentBackground = False
+      ParentColor = False
+      TabOrder = 4
+      object cboxHayDestinatarios: TCheckBox
+        AlignWithMargins = True
+        Left = 5
+        Top = 66
+        Width = 191
+        Height = 17
+        Align = alTop
+        Caption = 'Hay Destinatarios'
+        TabOrder = 0
+      end
+      object cboxEsPrimerRegistro: TCheckBox
+        AlignWithMargins = True
+        Left = 5
+        Top = 20
+        Width = 191
+        Height = 17
+        Align = alTop
+        Caption = 'Es Primer Registro'
+        Checked = True
+        State = cbChecked
+        TabOrder = 1
+      end
+      object cboxHayRequerimientoEAT: TCheckBox
+        AlignWithMargins = True
+        Left = 5
+        Top = 112
+        Width = 191
+        Height = 17
+        Align = alTop
+        Caption = 'Hay Requerimiento AEAT'
+        TabOrder = 2
+      end
+      object cboxHayFacturasSustituidas: TCheckBox
+        AlignWithMargins = True
+        Left = 5
+        Top = 89
+        Width = 191
+        Height = 17
+        Align = alTop
+        Caption = 'Hay Facturas Sustituidas'
+        TabOrder = 3
+      end
+      object cboxHayFacturasRectificadas: TCheckBox
+        AlignWithMargins = True
+        Left = 5
+        Top = 43
+        Width = 191
+        Height = 17
+        Align = alTop
+        Caption = 'Hay Facturas Rectificadas'
+        TabOrder = 4
+      end
+      object btnXMLFacturaAlta: TButton
+        AlignWithMargins = True
+        Left = 5
+        Top = 142
+        Width = 191
+        Height = 35
+        Align = alBottom
+        Caption = 'Generar XML Factura Alta'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 5
+        WordWrap = True
+        OnClick = btnXMLFacturaAltaClick
+      end
     end
-    object cboxHayRequerimientoEAT: TCheckBox
+    object cboxRegistroAnulacion: TGroupBox
       AlignWithMargins = True
       Left = 4
-      Top = 50
+      Top = 192
       Width = 201
-      Height = 17
+      Height = 113
       Align = alTop
-      Caption = 'Hay Requerimiento EAT'
-      TabOrder = 8
+      Caption = 'RegistroAnulacion'
+      Color = clSilver
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentBackground = False
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 5
+      object btnGenerarXMLAnulacion: TButton
+        AlignWithMargins = True
+        Left = 5
+        Top = 73
+        Width = 191
+        Height = 35
+        Align = alBottom
+        Caption = 'Generar XML Factura Anulacion'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 0
+        WordWrap = True
+        OnClick = btnGenerarXMLAnulacionClick
+      end
+      object cboxHayRechazoPrevio: TCheckBox
+        AlignWithMargins = True
+        Left = 5
+        Top = 43
+        Width = 191
+        Height = 17
+        Align = alTop
+        Caption = 'Hay Rechazo Previo'
+        TabOrder = 1
+      end
+      object cboxSinRegistroPrevio: TCheckBox
+        AlignWithMargins = True
+        Left = 5
+        Top = 20
+        Width = 191
+        Height = 17
+        Align = alTop
+        Caption = 'Sin Registro Previo'
+        Checked = True
+        State = cbChecked
+        TabOrder = 2
+      end
     end
   end
 end
